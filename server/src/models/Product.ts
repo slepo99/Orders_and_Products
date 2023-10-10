@@ -1,8 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface IProduct {
+export interface IProduct extends Document {
   serialNumber: number;
-  isNew: boolean;
+  //isNew: boolean;
   photo: string;
   title: string;
   type: string;
@@ -21,7 +21,7 @@ export interface IProduct {
 
 const ProductSchema = new Schema<IProduct>( {
   serialNumber: {type: Number},
-  isNew: { type: Boolean },
+  //isNew: { type: Boolean },
   photo: {type: String},
   title: {type: String},
   type: {type: String},

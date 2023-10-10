@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/authRoutes";
 import productRouter from "./routes/productRoutes";
+import orderRouter from "./routes/orderRoutes"
 
 dotenv.config({ path: "./.env" });
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use("/api", productRouter)
 app.use("/auth", authRouter);
+app.use("/api", orderRouter)
 
 async function startApp() {
   try {

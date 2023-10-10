@@ -18,7 +18,7 @@ class ProductController{
       const product = await ProductService.getAll();
       res.json(product);
     } catch (error) {
-      console.error("Error getting tests:", error);
+      console.error("Error getting products:", error);
       res.status(500).json({ error: "Failed to fetch products." });
     }
   }
