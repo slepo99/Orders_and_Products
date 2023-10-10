@@ -1,5 +1,14 @@
 <template>
-  <div>{{ currentDateTime.time }}</div>
+  <div class="container">
+    <div class="date">
+      {{ currentDateTime.day }}
+      {{ currentDateTime.month }}
+      {{ currentDateTime.year }}
+    </div>
+    <div class="time">
+      {{ currentDateTime.time }}
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -32,7 +41,7 @@ function getCurrentDate() {
     "November",
     "December",
   ];
-  
+
   const date = new Date();
   currentDateTime.time = date.toLocaleTimeString("en-US", {
     hour12: false,
@@ -46,8 +55,6 @@ function getCurrentDate() {
 }
 onMounted(() => {
   getCurrentDate();
-  console.log(currentDateTime);
-
   setInterval(getCurrentDate, 1000);
 });
 </script>

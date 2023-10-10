@@ -1,28 +1,26 @@
 <template>
-    <div>
-      <p>Active Sessions: {{ activeSessionsCount }}</p>
-    </div>
-  </template>
+  <div>
+    <p>Active Sessions: {{ activeSessionsCount }}</p>
+  </div>
+</template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { io, Socket } from 'socket.io-client';
-const socket: Socket = io("http://localhost:3000")
-const activeSessionsCount = ref(0);
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { io, Socket } from "socket.io-client";
+const socket: Socket = io("http://localhost:3000");
 
-socket.on('activeSessionsCount', (count: number) => {
+const activeSessionsCount = ref(0);
+socket.on("activeSessionsCount", (count: number) => {
   activeSessionsCount.value = count;
 });
 
 onMounted(() => {
-  socket.emit('joinSession');
+  socket.emit("joinSession");
 });
 
 onBeforeUnmount(() => {
-  socket.emit('leaveSession');
+  socket.emit("leaveSession");
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -12,6 +12,7 @@ import orderRouter from "./routes/orderRoutes";
 
 dotenv.config({ path: "./.env" });
 const app = express();
+
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: "*" } });
 
@@ -28,6 +29,7 @@ async function startApp() {
   try {
     await mongoose.connect(dbUrl);
     initializeWebSocketCounter(io);
+
     httpServer.listen(PORT, () => {
       console.log("server works on " + PORT + " port");
     });
