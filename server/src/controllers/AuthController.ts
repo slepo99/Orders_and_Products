@@ -21,7 +21,7 @@ class AuthController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Registration failed", errors });
       }
-      const { username, password, roles, score } = req.body;
+      const { username, password} = req.body;
       const candidate = await User.findOne({ username });
       if (candidate) {
         return res
@@ -33,7 +33,7 @@ class AuthController {
       const user = new User({
         username,
         password: hashPassword,
-        roles: [userRole!.value],
+        roles: [userRole.value],
       });
       await user.save();
       return res.json({ message: "User successfully registered" });
@@ -93,7 +93,6 @@ class AuthController {
         const userRole = await Role.findOne({ value: roles });
         user.roles = [userRole!.value];
       }
-      
 
       await user.save();
 

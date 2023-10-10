@@ -1,12 +1,14 @@
 <template>
   <div>
-   
+    <ActiveSessions/>
+    <DateTimeDisplay/>
   </div>
 
 </template>
 
 <script setup lang="ts">
-
+import ActiveSessions from './components/Header/ActiveSessions.vue';
+import DateTimeDisplay from './components/Header/DateTimeDisplay.vue';
 </script>
 
 <style scoped>

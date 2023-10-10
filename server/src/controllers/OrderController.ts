@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import OrderService from "../services/OrderService";
 import { IOrder } from "../models/Order";
 
-class OrderController{
+class OrderController {
   async create(req: Request, res: Response) {
     try {
       const order = await OrderService.create(req.body as Partial<IOrder>);
@@ -43,20 +43,20 @@ class OrderController{
   }
   async update(req: Request, res: Response) {
     try {
-        const updatedOrder = await OrderService.update(req.body)
-        return res.json(updatedOrder)
+      const updatedOrder = await OrderService.update(req.body);
+      return res.json(updatedOrder);
     } catch (e) {
-        console.error('Error updating order')
-        res.status(500).json({error: "Failed to update order"})
+      console.error("Error updating order");
+      res.status(500).json({ error: "Failed to update order" });
     }
   }
   async delete(req: Request, res: Response) {
     try {
-        const order = await OrderService.delete(req.params.id)
-        return res.json(order)
-    } catch(e) {
-        console.error("Error deleting order")
-        res.status(500).json({error: "Failed to delete order"})
+      const order = await OrderService.delete(req.params.id);
+      return res.json(order);
+    } catch (e) {
+      console.error("Error deleting order");
+      res.status(500).json({ error: "Failed to delete order" });
     }
   }
 }

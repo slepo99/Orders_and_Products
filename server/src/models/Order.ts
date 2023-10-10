@@ -8,12 +8,12 @@ export interface IOrder extends Document {
 }
 
 const OrderSchema = new Schema<IOrder>({
-    title: String,
+  title: String,
   date: Date,
   description: String,
-  products: [{ type: Schema.Types.ObjectId, ref: 'Product' }],
-})
+  products: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+});
 
-const OrderModel = mongoose.model<IOrder>("Order", OrderSchema)
+const OrderModel = mongoose.model<IOrder>("Order", OrderSchema);
 
-export default OrderModel
+export default OrderModel;

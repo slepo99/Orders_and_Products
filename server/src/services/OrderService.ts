@@ -38,19 +38,21 @@ class OrderService {
     }
   }
 
-  async update(order: Partial<IOrder>) { 
-    if(!order._id) {
-        throw new Error("ID undefined")
+  async update(order: Partial<IOrder>) {
+    if (!order._id) {
+      throw new Error("ID undefined");
     }
-    const updetedOrder = await OrderModel.findByIdAndUpdate(order._id, order, {new: true})
-    return updetedOrder
+    const updetedOrder = await OrderModel.findByIdAndUpdate(order._id, order, {
+      new: true,
+    });
+    return updetedOrder;
   }
   async delete(id: string) {
-    if(!id) {
-        throw new Error("ID undefined")
+    if (!id) {
+      throw new Error("ID undefined");
     }
-    const order = await OrderModel.findByIdAndDelete(id)
-    return order
+    const order = await OrderModel.findByIdAndDelete(id);
+    return order;
   }
 }
 

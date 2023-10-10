@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export interface IProduct extends Document {
   serialNumber: number;
-  //isNew: boolean;
+  // isNew: boolean;
   photo: string;
   title: string;
   type: string;
@@ -19,24 +19,32 @@ export interface IProduct extends Document {
   date: string;
 }
 
-const ProductSchema = new Schema<IProduct>( {
-  serialNumber: {type: Number},
+const ProductSchema = new Schema<IProduct>({
+  serialNumber: { type: Number },
   //isNew: { type: Boolean },
-  photo: {type: String},
-  title: {type: String},
-  type: {type: String},
-  specification:{type: String},
+  photo: { type: String },
+  title: { type: String },
+  type: { type: String },
+  specification: { type: String },
   guarantee: {
-    start: {type: String},
-    end: {type: String}
+    start: { type: String },
+    end: { type: String },
   },
   price: [
-    {value: {type: Number}, symbol: {type: String}, isDefault: {type: Boolean}},
-    {value: {type: Number}, symbol:{type: String}, isDefault: {type: Boolean}}
+    {
+      value: { type: Number },
+      symbol: { type: String },
+      isDefault: { type: Boolean },
+    },
+    {
+      value: { type: Number },
+      symbol: { type: String },
+      isDefault: { type: Boolean },
+    },
   ],
-  order:{type: Number},
-  date: {type: String}
-},);
+  order: { type: Number },
+  date: { type: String },
+});
 
 const ProductModel = mongoose.model<IProduct>("Product", ProductSchema);
 

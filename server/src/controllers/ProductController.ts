@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import ProductService from "../services/ProductService";
 import { IProduct } from "../models/Product";
 
-class ProductController{
+class ProductController {
   async create(req: Request, res: Response) {
     try {
-      const product = await ProductService.create(req.body as Partial<IProduct>);
+      const product = await ProductService.create(
+        req.body as Partial<IProduct>
+      );
       res.json(product);
     } catch (error) {
       console.error("Error creating product:", error);
