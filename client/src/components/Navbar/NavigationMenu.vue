@@ -15,9 +15,13 @@
       </div>
     </div>
     <div class="navigation-links">
-      <div class="order"><h4>ORDER</h4></div>
+      <div class="order">
+        <router-link to="/orders"><h4>ORDER</h4> </router-link>
+      </div>
       <div class="groups"><h4>GROUPS</h4></div>
-      <div class="products"><h4>PRODUCTS</h4></div>
+      <div class="products">
+        <router-link to="/"><h4>PRODUCTS</h4></router-link>
+      </div>
       <div class="users"><h4>USERS</h4></div>
       <div class="settings"><h4>SETTINGS</h4></div>
     </div>
@@ -65,6 +69,35 @@
     margin-top: 5vh;
     display: flex;
     flex-direction: column;
+    div {
+      display: flex;
+      justify-content: center;
+      a {
+        text-decoration: none;
+      }
+      h4 {
+        position: relative;
+        color: #484848;
+        font-size: 1.25rem;
+        text-decoration: none;
+        width: fit-content;
+      }
+      h4::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 3px;
+        background-color: green;
+      }
+      h4:hover:before {
+        width: 100%;
+      }
+      h4::before {
+        transition: width 0.35s;
+      }
+    }
   }
 }
 </style>
