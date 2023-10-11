@@ -1,14 +1,15 @@
 <template>
   <div>
-    <ActiveSessions/>
-    <DateTimeDisplay/>
+    <TopMenu/>
   </div>
 
 </template>
 
 <script setup lang="ts">
-import ActiveSessions from './components/Header/ActiveSessions.vue';
-import DateTimeDisplay from './components/Header/DateTimeDisplay.vue';
+import TopMenu from './components/Header/TopMenu.vue';
+
+
+
 </script>
 
 <style scoped>

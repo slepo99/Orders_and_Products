@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <p>Active Sessions: {{ activeSessionsCount }}</p>
+  <div class="container">
+    <span class="active-sessions"
+      >Active Sessions: {{ activeSessionsCount }}</span
+    >
   </div>
 </template>
 
@@ -23,4 +25,11 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.container {
+  .active-sessions {
+    font-size: 14px;
+      font-weight: 600;
+  }
+}
+</style>
