@@ -1,12 +1,14 @@
 <template>
   <div>
     <TopMenu/>
+    <NavigationMenu/>
   </div>
 
 </template>
 
 <script setup lang="ts">
 import TopMenu from './components/Header/TopMenu.vue';
+import NavigationMenu from './components/Navbar/NavigationMenu.vue';
 
 
 
