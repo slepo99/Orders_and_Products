@@ -43,8 +43,8 @@ class OrderController {
   }
   async update(req: Request, res: Response) {
     try {
-      const updatedOrder = await OrderService.update(req.body);
-      return res.json(updatedOrder);
+      const order = await OrderService.update(req.body);
+      return res.json(order);
     } catch (e) {
       console.error("Error updating order");
       res.status(500).json({ error: "Failed to update order" });

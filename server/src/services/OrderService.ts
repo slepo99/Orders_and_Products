@@ -38,7 +38,7 @@ class OrderService {
     }
   }
 
-  async update(order: Partial<IOrder>) {
+  async update(order:Partial<IOrder>) {
     if (!order._id) {
       throw new Error("ID undefined");
     }
