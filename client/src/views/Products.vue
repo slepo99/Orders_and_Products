@@ -9,7 +9,5 @@
 </script>
 
 <style scoped>
-.container_products {
-   
-}
+
 </style>

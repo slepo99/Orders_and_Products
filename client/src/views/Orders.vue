@@ -40,6 +40,12 @@ function openOrderWindow() {
    gap: 20px;
    display: flex;
    align-items: center;
+   cursor: pointer;
+   img:hover {
+    -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+   }
   }
 }
 </style>
