@@ -1,6 +1,6 @@
 <template>
-    <div class="container_products">
-        PRODUCTS
+    <div>
+        Products
     </div>
 </template>
 
@@ -9,7 +9,5 @@
 </script>
 
 <style scoped>
-.container_products {
-   
-}
+
 </style>
