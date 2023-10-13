@@ -1,10 +1,12 @@
 <template>
     <div class="container_products">
-        PRODUCTS
+        <ProductsList/>
     </div>
 </template>
 
 <script setup lang="ts">
+import ProductsList from '@/components/Products/ProductsList.vue';
+
 
 </script>
 

@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
-import { Order } from "@/types/Order";
+import {  OrderDescription } from "@/types/Order";
 const baseURL = "http://localhost:3000/api";
 
 const axiosInstance = axios.create({
   baseURL,
 });
 
-export const CreateOrder = async (orderData: Order): Promise<AxiosResponse<Order>> => {
+export const CreateOrder = async (orderData: OrderDescription): Promise<AxiosResponse<OrderDescription>> => {
   return await axiosInstance.post("/orders", orderData);
 };
 export const GetOrders = async () => {

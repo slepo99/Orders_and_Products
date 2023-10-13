@@ -1,5 +1,5 @@
 <template>
-  <ModalWindow :show="props.show">
+  <ModalWindow :showModal="props.showModal">
     <div class="container-title">
       <h1>Order creation</h1>
     </div>
@@ -35,32 +35,32 @@
 
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
-import { Order } from "@/types/Order";
+import { OrderDescription } from "@/types/Order";
 import { reactive, onMounted, computed } from "vue";
 import { useOrder } from "@/store/OrdersStore";
 
 const props = defineProps({
-    show: {
-      type: Boolean,
-      default: false,
-    },
+  showModal: {
+    type: Boolean,
+    default: false,
+  },
 });
-const order = useOrder()
+const order = useOrder();
 const getDate = computed<string>(() => {
   const date = new Date();
-  return `${date.getDate().toString()}/${date.getMonth().toString() + 1}/${date
-    .getFullYear()
-    .toString()}`;
+  return `${date.getDate().toString()} / ${(
+    date.getMonth() + 1
+  ).toString()} / ${date.getFullYear().toString()}`;
 });
-const orderForm = reactive<Order>({
+const orderForm = reactive<OrderDescription>({
   title: "",
   date: getDate.value,
   description: "",
 });
 async function createOrder() {
-  await order.createOrder(orderForm)
-  orderForm.title = ''
-  orderForm.description = ''
+  await order.createOrder(orderForm);
+  orderForm.title = "";
+  orderForm.description = "";
 }
 onMounted(() => {});
 </script>

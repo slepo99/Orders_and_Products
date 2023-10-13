@@ -1,5 +1,5 @@
 <template>
-    <div class="dialog" v-if="props.show">
+    <div class="dialog" v-if="props.showModal">
       <div @click.stop class="dialog-content">
         <slot> </slot>
       </div>
@@ -7,7 +7,7 @@
   </template>
   <script setup lang="ts">
   const props = defineProps({
-    show: {
+    showModal: {
       type: Boolean,
       default: false,
     },
