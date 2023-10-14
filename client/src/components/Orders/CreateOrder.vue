@@ -11,7 +11,7 @@
     <div class="container-form">
       <form @submit.prevent="createOrder" class="form">
         <div class="title">
-          <span>Enter product title:</span>
+          <span>Enter order title:</span>
           <label for="title">
             <input
               type="text"
@@ -22,7 +22,7 @@
           </label>
         </div>
         <div class="description">
-          <span>Enter product description:</span>
+          <span>Enter order description:</span>
           <label for="description">
             <input
               class="input-description"
@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
-import { OrderDescription } from "@/types/Order";
+import { OrderDescription } from "@/types/OrderType";
 import { reactive, onMounted, computed } from "vue";
 import { useOrder } from "@/store/OrdersStore";
 
@@ -142,3 +142,4 @@ onMounted(() => {});
   }
 }
 </style>
+@/types/OrderType

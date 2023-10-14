@@ -5,7 +5,7 @@
             <h2>Are you sure you want to delete order ?</h2>
             <div class="delete-box_window_btns">
               <button @click="removeOrder(currentOrderId)">Yes</button>
-              <button @click="closeDialogWindow">No</button>
+              <button @click="closeDeleteOrderWindow">No</button>
             </div>
           </div>
         </ModalWindow>
@@ -27,11 +27,11 @@ const props = defineProps({
     }
 })
 const emit = defineEmits()
-function closeDialogWindow() {
- emit('closeDialogWindow')
+function closeDeleteOrderWindow() {
+ emit('closeDeleteOrderWindow')
 }
 async function removeOrder(id: string) {
-  emit('closeDialogWindow')
+  emit('closeDeleteOrderWindow')
   await order.deleteOrder(id);
   await order.getOrders();
 }

@@ -28,7 +28,7 @@
         <p class="price_uah">₴{{ totalUahPrice(item.products) }}</p>
       </div>
       <div class="delete-box">
-        <button @click="openDialogWindow(item._id)" class="delete-box_btn">
+        <button @click="openDeleteOrderWindow(item._id)" class="delete-box_btn">
           <img
             width="24"
             height="24"
@@ -38,33 +38,30 @@
         </button>
       </div>
     </div>
-    <OrderRemoveDialog
+    <OrderRemove
       :currentOrderId="currentOrderId"
       :showModal="showModal"
-      @closeDialogWindow="closeDialogWindow"
+      @closeDeleteOrderWindow="closeDeleteOrderWindow"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-//import ModalWindow from "@/UI/ModalWindow.vue";
 import { useOrder } from "@/store/OrdersStore";
-import { Product } from "@/types/Order";
+import { Product } from "@/types/OrderType";
 import { onMounted, ref, computed } from "vue";
-import OrderRemoveDialog from "./OrderRemoveDialog.vue";
+import OrderRemove from "./OrderRemove.vue";
 
 const order = useOrder();
 const isActive = ref(false);
 const showModal = ref(false);
 const currentOrderId = ref("");
 
-function openDialogWindow(id: string) {
+function openDeleteOrderWindow(id: string) {
   currentOrderId.value = id;
   showModal.value = true;
 }
-function closeDialogWindow() {
-  console.log("emmited");
-
+function closeDeleteOrderWindow() {
   showModal.value = false;
 }
 function openProductList(id: string) {
@@ -236,3 +233,4 @@ onMounted(() => {
   }
 }
 </style>
+@/types/OrderType

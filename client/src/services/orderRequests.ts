@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import {  OrderDescription } from "@/types/Order";
+import {  Order, OrderDescription } from "@/types/OrderType";
 const baseURL = "http://localhost:3000/api";
 
 const axiosInstance = axios.create({
@@ -14,4 +14,7 @@ export const GetOrders = async () => {
 }
 export const DeleteOrder = async (id : string) => {
   return await axiosInstance.delete(`/orders/${id}`)
+}
+export const DeleteProduct = async  (order: Order) =>  {
+  return await axiosInstance.put('/orders', order)
 }

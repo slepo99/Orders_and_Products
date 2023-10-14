@@ -1,12 +1,17 @@
 import { defineStore } from "pinia";
-import { CreateOrder, GetOrders, DeleteOrder } from "@/services/orderRequests";
-import { Order, OrderDescription } from "@/types/Order";
+import {
+  CreateOrder,
+  GetOrders,
+  DeleteOrder,
+  DeleteProduct,
+} from "@/services/orderRequests";
+import { Order, OrderDescription } from "@/types/OrderType";
 export const useOrder = defineStore("order", {
   state: () => ({
     orders: [] as Order[],
     isActive: false as boolean,
     orderId: "" as string,
-    showModal: false as boolean
+    showModal: false as boolean,
   }),
   getters: {
     selectedOrder(): Order[] {
@@ -29,6 +34,15 @@ export const useOrder = defineStore("order", {
     },
     async deleteOrder(id: string) {
       await DeleteOrder(id);
+    },
+    async deleteProduct(id: string) {
+      const order = this.selectedOrder.map((item) => {
+        const filteredProducts = item.products.filter(
+          (product) => product._id !== id);
+        item.products = filteredProducts;
+        return item;
+      });
+      await DeleteProduct(order[0]);
     },
     showProducts(isActive: boolean) {
       this.isActive = isActive;

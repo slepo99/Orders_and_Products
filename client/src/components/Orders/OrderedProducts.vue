@@ -4,7 +4,7 @@
       <div class="title-box">
         <h3>{{ item.title }}</h3>
       </div>
-      <div class="add-product">
+      <div  @click="openNewProductWindow" class="add-product">
         <button class="add-product_btn">
           <img
             width="22"
@@ -12,8 +12,9 @@
             src="https://img.icons8.com/color/96/add--v1.png"
             alt="add--v1"
           />
+          <p class="add-product_btn_text">Add product</p>
         </button>
-        <p class="add-product_text">Add product</p>
+        
       </div>
       <div class="product-wrapper">
         <div v-for="product in item.products" :key="product._id">
@@ -31,31 +32,42 @@
               <p>{{ product.status }}</p>
             </div>
             <div class="product_delete">
-              <img
-                width="24"
-                height="24"
-                src="https://img.icons8.com/material/96/808080/trash--v1.png"
-                alt="trash--v1"
-              />
+              <button @click="removeProduct(product._id)">
+                <img
+                  width="24"
+                  height="24"
+                  src="https://img.icons8.com/material/96/808080/trash--v1.png"
+                  alt="trash--v1"
+                />
+              </button>
             </div>
           </div>
           <hr v-show="product == item.products[item.products.length - 1]" />
         </div>
       </div>
+      <CreateProduct :showModal="showModal"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useOrder } from "@/store/OrdersStore";
+import { ref } from 'vue'
+import CreateProduct from "./CreateProduct.vue";
 const order = useOrder();
-
+const showModal = ref<boolean>(false)
 function setStatus(status: string) {
   if (status == "Free") {
     return "product_free";
   } else if (status == "Busy") {
     return "product_busy";
   }
+}
+function openNewProductWindow() {
+  showModal.value = true
+}
+async function removeProduct(id: string) {
+  await order.deleteProduct(id);
 }
 </script>
 
@@ -88,13 +100,16 @@ function setStatus(status: string) {
       border: none;
       padding-left: 25px;
       cursor: pointer;
-    }
-    &_text {
+      display: flex;
+      align-items: center;
+      &_text {
       padding-left: 5px;
       color: green;
-      font-weight: 500;
+      font-weight: 600;
       margin: 0;
     }
+    }
+   
   }
   .product-wrapper {
     overflow: scroll;
@@ -140,6 +155,13 @@ function setStatus(status: string) {
         }
         &_serial {
           color: rgb(161, 161, 161);
+        }
+      }
+      &_delete {
+        button {
+          border: none;
+          background: none;
+          cursor: pointer;
         }
       }
     }

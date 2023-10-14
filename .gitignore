@@ -8,7 +8,7 @@ node_modules
 /server/dist
 /server/.env
 .vscode
-
+notes
 # local env files
 .env.local
 .env.*.local
