@@ -12,3 +12,6 @@ export const CreateOrder = async (orderData: OrderDescription): Promise<AxiosRes
 export const GetOrders = async () => {
   return await axiosInstance.get("/orders")
 }
+export const DeleteOrder = async (id : string) => {
+  return await axiosInstance.delete(`/orders/${id}`)
+}

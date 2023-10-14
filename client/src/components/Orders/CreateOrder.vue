@@ -1,5 +1,10 @@
 <template>
   <ModalWindow :showModal="props.showModal">
+    <div class="close-dialog">
+      <button class="close-dialog_btn" @click="closeDialog">
+        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/60/7DAE33/delete-sign.png" alt="delete-sign"/>
+      </button>
+    </div>
     <div class="container-title">
       <h1>Order creation</h1>
     </div>
@@ -45,6 +50,7 @@ const props = defineProps({
     default: false,
   },
 });
+const emit = defineEmits()
 const order = useOrder();
 const getDate = computed<string>(() => {
   const date = new Date();
@@ -61,16 +67,36 @@ async function createOrder() {
   await order.createOrder(orderForm);
   orderForm.title = "";
   orderForm.description = "";
+  await order.getOrders()
+  emit('closeOrderWindow')
+}
+function closeDialog() {
+  emit('closeOrderWindow')
 }
 onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>
+.close-dialog {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: black;
+  &_btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
 .container-form {
   padding: 20px 100px 100px 100px;
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 50px;
     div {
       display: flex;
@@ -99,6 +125,19 @@ onMounted(() => {});
         top: -12px;
         font-size: 12px;
       }
+    }
+    button {
+      width: 150px;
+      height: 50px;
+      cursor: pointer;
+      background-color: black;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+    button:hover {
+      background-color: white;
+      color: black;
     }
   }
 }

@@ -6,6 +6,7 @@
     </div>
   </template>
   <script setup lang="ts">
+  
   const props = defineProps({
     showModal: {
       type: Boolean,
@@ -20,7 +21,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.476);
     position: fixed;
     display: flex;
     padding-bottom: 200px;

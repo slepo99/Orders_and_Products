@@ -1,6 +1,6 @@
 <template>
   <div :class="{ container_active: isActive }" class="container">
-    <div v-for="item in order.orders" :key="item._id" class="order-list">
+    <div v-for="(item, id) in order.orders" :key="id" class="order-list">
       <div class="title-box">
         <p class="title">{{ item.title }}</p>
       </div>
@@ -24,25 +24,49 @@
       </div>
 
       <div class="price-box">
-        <p class="price">Price</p>
+        <p class="price_usd">${{ totalUSDPrice(item.products) }}</p>
+        <p class="price_uah">₴{{ totalUahPrice(item.products) }}</p>
       </div>
       <div class="delete-box">
-        <img
-          width="24"
-          height="24"
-          src="https://img.icons8.com/material/96/808080/trash--v1.png"
-          alt="trash--v1"
-        />
+        <button @click="openDialogWindow(item._id)" class="delete-box_btn">
+          <img
+            width="24"
+            height="24"
+            src="https://img.icons8.com/material/96/808080/trash--v1.png"
+            alt="trash--v1"
+          />
+        </button>
       </div>
     </div>
+    <OrderRemoveDialog
+      :currentOrderId="currentOrderId"
+      :showModal="showModal"
+      @closeDialogWindow="closeDialogWindow"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+//import ModalWindow from "@/UI/ModalWindow.vue";
 import { useOrder } from "@/store/OrdersStore";
-import { onMounted, ref } from "vue";
+import { Product } from "@/types/Order";
+import { onMounted, ref, computed } from "vue";
+import OrderRemoveDialog from "./OrderRemoveDialog.vue";
+
 const order = useOrder();
 const isActive = ref(false);
+const showModal = ref(false);
+const currentOrderId = ref("");
+
+function openDialogWindow(id: string) {
+  currentOrderId.value = id;
+  showModal.value = true;
+}
+function closeDialogWindow() {
+  console.log("emmited");
+
+  showModal.value = false;
+}
 function openProductList(id: string) {
   isActive.value = !isActive.value;
   order.showProducts(isActive.value);
@@ -50,6 +74,28 @@ function openProductList(id: string) {
     order.getSelectedOrder(id);
   }
 }
+
+const getTotalPriceInCurrency = (
+  products: Product[],
+  currencySymbol: string
+): number => {
+  return products.reduce((totalPrice, product) => {
+    const currency = product.price.reduce((sum, priceItem) => {
+      if (priceItem.symbol == currencySymbol) {
+        return sum + priceItem.value;
+      }
+      return sum;
+    }, 0);
+    return totalPrice + currency;
+  }, 0);
+};
+const totalUSDPrice = computed(
+  () => (product: Product[]) => getTotalPriceInCurrency(product, "USD")
+);
+const totalUahPrice = computed(
+  () => (product: Product[]) => getTotalPriceInCurrency(product, "UAH")
+);
+
 onMounted(() => {
   order.getOrders();
 });
@@ -76,6 +122,7 @@ onMounted(() => {
     align-items: center;
     align-content: center;
     cursor: pointer;
+    background-color: #fff;
     .title-box {
       .title {
         font-size: 19px;
@@ -101,9 +148,11 @@ onMounted(() => {
       display: flex;
       width: 100%;
       justify-content: center;
+
       button {
         background: none;
         border: none;
+        cursor: pointer;
       }
       .details {
         border: 2px solid rgb(210, 210, 210);
@@ -112,8 +161,30 @@ onMounted(() => {
       }
     }
     .price-box {
-      .price {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+      p {
         color: gray;
+        margin: 0;
+      }
+    }
+    .delete-box {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      
+
+      &_btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      &_btn:hover img {
+        height: 30px;
+        width: 30px;
       }
     }
     p {

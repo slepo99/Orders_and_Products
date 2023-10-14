@@ -6,11 +6,11 @@
         height="44"
         src="https://img.icons8.com/color/96/add--v1.png"
         alt="add--v1"
-        @click="openOrderWindow()"
+        @click="openNewOrderWindow()"
       />
       <h2>Orders / {{ ordersLength }}</h2>
     </div>
-    <CreateOrder :showModal="showModal" />
+    <CreateOrder :showModal="showModal" @closeOrderWindow="closeOrderWindow"/>
     <div class="order_wrapper">
       <OrdersList />
       <OrderedProducts v-if="order.isActive" />
@@ -29,8 +29,11 @@ import { ref, computed } from "vue";
 const showModal = ref<boolean>(false);
 const order = useOrder();
 
-function openOrderWindow() {
+function openNewOrderWindow() {
   showModal.value = true;
+}
+function closeOrderWindow() {
+  showModal.value = false
 }
 const ordersLength = computed(() => {
   return order.orders.length;
