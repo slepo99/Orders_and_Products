@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 import { useOrder } from "@/store/OrdersStore";
-import { Product } from "@/types/OrderType";
+import { ProductGet } from "@/types/OrderTypes";
 import { onMounted, ref, computed } from "vue";
 import OrderRemove from "./OrderRemove.vue";
 
@@ -73,7 +73,7 @@ function openProductList(id: string) {
 }
 
 const getTotalPriceInCurrency = (
-  products: Product[],
+  products: ProductGet[],
   currencySymbol: string
 ): number => {
   return products.reduce((totalPrice, product) => {
@@ -87,10 +87,10 @@ const getTotalPriceInCurrency = (
   }, 0);
 };
 const totalUSDPrice = computed(
-  () => (product: Product[]) => getTotalPriceInCurrency(product, "USD")
+  () => (product: ProductGet[]) => getTotalPriceInCurrency(product, "USD")
 );
 const totalUahPrice = computed(
-  () => (product: Product[]) => getTotalPriceInCurrency(product, "UAH")
+  () => (product: ProductGet[]) => getTotalPriceInCurrency(product, "UAH")
 );
 
 onMounted(() => {
@@ -172,7 +172,6 @@ onMounted(() => {
       width: 100%;
       justify-content: center;
       align-items: center;
-      
 
       &_btn {
         background: none;
@@ -234,3 +233,4 @@ onMounted(() => {
 }
 </style>
 @/types/OrderType
+@/types/OrderTypes

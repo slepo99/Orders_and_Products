@@ -3,9 +3,10 @@ import {
   CreateOrder,
   GetOrders,
   DeleteOrder,
-  DeleteProduct,
+  PutProduct,
 } from "@/services/orderRequests";
-import { Order, OrderDescription } from "@/types/OrderType";
+import { Order, OrderDescription } from "@/types/OrderTypes";
+import { ProductPost } from "@/types/ProductTypes";
 export const useOrder = defineStore("order", {
   state: () => ({
     orders: [] as Order[],
@@ -28,25 +29,41 @@ export const useOrder = defineStore("order", {
         throw error;
       }
     },
+
     async getOrders() {
       const response = await GetOrders();
       this.orders = response.data;
     },
+
     async deleteOrder(id: string) {
       await DeleteOrder(id);
     },
-    async deleteProduct(id: string) {
+
+    async deleteProduct(id: string | undefined) {
       const order = this.selectedOrder.map((item) => {
         const filteredProducts = item.products.filter(
-          (product) => product._id !== id);
+          (product) => product._id !== id
+        );
         item.products = filteredProducts;
         return item;
       });
-      await DeleteProduct(order[0]);
+      await PutProduct(order[0]);
     },
+
+    async createProduct(product: ProductPost) {
+      const updatedOrder = this.selectedOrder.map((i) => {
+        if (i) {
+          i.products.push(product);
+        }
+        return i;
+      });
+      await PutProduct(updatedOrder[0]);
+    },
+
     showProducts(isActive: boolean) {
       this.isActive = isActive;
     },
+
     getSelectedOrder(id: string) {
       this.orderId = id;
     },

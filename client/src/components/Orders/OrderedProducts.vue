@@ -1,10 +1,16 @@
 <template>
-  <div class="container-products">
+  <div class="constainer">
+    <div class="close-dialog">
+      <button class="close-dialog_btn" @click="closeDialog">
+        <img width="14" height="14" src="https://img.icons8.com/material-outlined/24/C7C7C7/delete-sign.png" alt="delete-sign"/>
+      </button>
+    </div>
+    <div class="container-products">
     <div v-for="(item, id) in order.selectedOrder" :key="id">
       <div class="title-box">
         <h3>{{ item.title }}</h3>
       </div>
-      <div  @click="openNewProductWindow" class="add-product">
+      <div @click="openNewProductWindow" class="add-product">
         <button class="add-product_btn">
           <img
             width="22"
@@ -14,7 +20,6 @@
           />
           <p class="add-product_btn_text">Add product</p>
         </button>
-        
       </div>
       <div class="product-wrapper">
         <div v-for="product in item.products" :key="product._id">
@@ -29,7 +34,8 @@
               <p class="product_title_serial">{{ product.serialNumber }}</p>
             </div>
             <div class="product_status">
-              <p>{{ product.status }}</p>
+              <p v-if="product.status" class="product_status_free">Free</p>
+              <p v-else class="product_status_repairing"> Repairing</p>
             </div>
             <div class="product_delete">
               <button @click="removeProduct(product._id)">
@@ -45,34 +51,69 @@
           <hr v-show="product == item.products[item.products.length - 1]" />
         </div>
       </div>
-      <CreateProduct :showModal="showModal"/>
+      <CreateProduct
+        @closeNewProductWindow="closeNewProductWindow"
+        :showModal="showModal"
+      />
     </div>
   </div>
+  </div>
+ 
 </template>
 
 <script setup lang="ts">
 import { useOrder } from "@/store/OrdersStore";
-import { ref } from 'vue'
+import { ref } from "vue";
 import CreateProduct from "./CreateProduct.vue";
 const order = useOrder();
-const showModal = ref<boolean>(false)
-function setStatus(status: string) {
-  if (status == "Free") {
+const showModal = ref<boolean>(false);
+function setStatus(status: boolean) {
+  if (status == true) {
     return "product_free";
-  } else if (status == "Busy") {
+  } else if (status == false) {
     return "product_busy";
   }
 }
-function openNewProductWindow() {
-  showModal.value = true
+function closeNewProductWindow() {
+  showModal.value = false;
 }
-async function removeProduct(id: string) {
+function openNewProductWindow() {
+  showModal.value = true;
+}
+async function removeProduct(id: string | undefined) {
   await order.deleteProduct(id);
 }
 </script>
 
 <style lang="scss" scoped>
+.container {
+  transition: width 0.5s ease;
+}
+.close-dialog {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  top: 2px;
+  left: 12px;
+  align-items: center;
+  height: 0;
+  transition: width 0.5s ease;
+  &_btn {
+    background: none;
+    border: 1px solid rgb(199, 199, 199);
+    justify-content: center;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
+  }
+}
 .container-products {
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -103,20 +144,19 @@ async function removeProduct(id: string) {
       display: flex;
       align-items: center;
       &_text {
-      padding-left: 5px;
-      color: green;
-      font-weight: 600;
-      margin: 0;
+        padding-left: 5px;
+        color: green;
+        font-weight: 600;
+        margin: 0;
+      }
     }
-    }
-   
   }
   .product-wrapper {
     overflow: scroll;
 
     .product {
       cursor: pointer;
-      grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 0.5fr 0.5fr 2fr 1fr 1fr;
       display: grid;
       justify-content: space-around;
       align-items: center;
@@ -135,14 +175,19 @@ async function removeProduct(id: string) {
         background: #d31f1f;
       }
       &_title {
+        width: 100%;
         p {
           margin: 0;
         }
       }
       &_status {
-        p {
+        &_free {
           font-weight: 500;
           color: #57bc57;
+        }
+        &_repairing {
+          font-weight: 500;
+          color: #c92828;
         }
       }
       &_title {

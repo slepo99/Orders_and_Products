@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
-import { OrderDescription } from "@/types/OrderType";
+import { OrderDescription } from "@/types/OrderTypes";
 import { reactive, onMounted, computed } from "vue";
 import { useOrder } from "@/store/OrdersStore";
 
@@ -142,4 +142,4 @@ onMounted(() => {});
   }
 }
 </style>
-@/types/OrderType
+@/types/OrderType@/types/OrderTypes
