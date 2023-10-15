@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ container_active: isActive }" class="container">
+  <div :class="{ container_active: order.isActive }" class="container">
     <div v-for="(item, id) in order.orders" :key="id" class="order-list">
       <div class="title-box">
         <p class="title">{{ item.title }}</p>
@@ -106,7 +106,7 @@ onMounted(() => {
   flex-direction: column;
   transition: width 0.5s ease;
   width: 100%;
-  height: 60vh;
+  height: 600px;
   overflow: scroll;
   .order-list {
     grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;

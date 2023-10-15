@@ -120,7 +120,7 @@ import {
   isNew,
   specification,
 } from "@/helpers/mocks/ProductSelectMocks";
-import productForm from "@/helpers/common/ProductCreateForm";
+import {productForm, eraiseProductFields} from "@/helpers/common/ProductCreateForm";
 const order = useOrder();
 const props = defineProps({
   showModal: {
@@ -138,6 +138,7 @@ async function createProduct() {
       return;
     }
     await order.createProduct(productForm);
+    eraiseProductFields()
     emit("closeNewProductWindow");
   } catch (error) {
     console.log("Login error", error);

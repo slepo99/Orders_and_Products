@@ -1,11 +1,11 @@
 <template>
-  <div class="constainer">
-    <div class="close-dialog">
-      <button class="close-dialog_btn" @click="closeDialog">
+    
+    <div class="container-products">
+      <div class="close-dialog">
+      <button class="close-dialog_btn" @click="hideProducts">
         <img width="14" height="14" src="https://img.icons8.com/material-outlined/24/C7C7C7/delete-sign.png" alt="delete-sign"/>
       </button>
     </div>
-    <div class="container-products">
     <div v-for="(item, id) in order.selectedOrder" :key="id">
       <div class="title-box">
         <h3>{{ item.title }}</h3>
@@ -57,7 +57,6 @@
       />
     </div>
   </div>
-  </div>
  
 </template>
 
@@ -74,6 +73,9 @@ function setStatus(status: boolean) {
     return "product_busy";
   }
 }
+function hideProducts() {
+order.hideProducts()
+}
 function closeNewProductWindow() {
   showModal.value = false;
 }
@@ -86,10 +88,11 @@ async function removeProduct(id: string | undefined) {
 </script>
 
 <style lang="scss" scoped>
-.container {
+
+
+.container-products {
   transition: width 0.5s ease;
-}
-.close-dialog {
+  .close-dialog {
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -112,8 +115,6 @@ async function removeProduct(id: string | undefined) {
     box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
   }
 }
-.container-products {
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -122,19 +123,20 @@ async function removeProduct(id: string | undefined) {
   border-radius: 6px;
   transition: width 0.5s ease;
   background-color: #fff;
-  max-height: 60vh;
-  overflow: scroll;
+  height: 600px;
+  
 
   .title-box {
     display: flex;
+    height: 50px;
 
     h3 {
       padding-left: 25px;
     }
   }
   .add-product {
+    height: 50px;
     display: flex;
-    margin-bottom: 10px;
     cursor: pointer;
     &_btn {
       background: none;
@@ -152,9 +154,11 @@ async function removeProduct(id: string | undefined) {
     }
   }
   .product-wrapper {
-    overflow: scroll;
-
+   height: 500px;
+   overflow: scroll;
     .product {
+      height: auto;
+      overflow: scroll;
       cursor: pointer;
       grid-template-columns: 0.5fr 0.5fr 2fr 1fr 1fr;
       display: grid;
@@ -222,4 +226,7 @@ async function removeProduct(id: string | undefined) {
     margin: 0;
   }
 }
+
+
+
 </style>

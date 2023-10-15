@@ -63,7 +63,9 @@ export const useOrder = defineStore("order", {
     showProducts(isActive: boolean) {
       this.isActive = isActive;
     },
-
+    hideProducts() {
+      this.isActive = false
+    },
     getSelectedOrder(id: string) {
       this.orderId = id;
     },
