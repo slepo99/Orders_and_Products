@@ -16,5 +16,12 @@ export const DeleteOrder = async (id : string | undefined) => {
   return await axiosInstance.delete(`/orders/${id}`)
 }
 export const PutProduct = async  (order: Order[] | Order) =>  {
-  return await axiosInstance.put('/orders', order)
+  try{
+    await axiosInstance.put('/orders', order)
+    console.log('succes');
+  }catch(e ) {
+    console.log(e, 'eerror');
+    
+  }
+  
 }

@@ -1,10 +1,6 @@
 <template>
   <div class="container">
-    <div
-      v-for="item in order.orders"
-      :key="item._id"
-      class="container-products"
-    >
+    <div class="container-products">
       <div
         v-for="product in order.filteredProductsByType"
         :key="product._id"
@@ -40,11 +36,11 @@
         <div class="products-list_guarantee">
           <span class="products-list_guarantee_start">
             <p class="products-list_guarantee_start_from">from:</p>
-            {{ setDate(product.guarantee.start) }}</span
+            {{ setGuarantee(product.guarantee.start) }}</span
           >
           <span class="products-list_guarantee_end">
             <p class="products-list_guarantee_end_to">to:</p>
-            {{ setDate(product.guarantee.start) }}</span
+            {{ setGuarantee(product.guarantee.end) }}</span
           >
         </div>
 
@@ -67,13 +63,13 @@
         </div>
 
         <div class="products-list_order-title">
-          <span>{{ setOrderTitle(item.title) }}</span>
+          <span>{{ setOrderTitle(product._id) }}</span>
         </div>
 
         <div class="products-list_date">
-          {{ setDate(item.date) }}
+          {{ setDate(product._id) }}
         </div>
-        <DeleteIcon @click="removeProduct(product._id)"/>
+        <DeleteIcon @click="removeProduct(product._id)" />
       </div>
     </div>
   </div>
@@ -85,6 +81,12 @@ import { onMounted } from "vue";
 import { months } from "@/helpers/mocks/DateMocks";
 import DeleteIcon from "@/UI/DeleteIcon.vue";
 const order = useOrder();
+function setGuarantee(date: string) {
+  const newDate = date.split('-');
+  return `${newDate[0]} / ${months[parseFloat(newDate[1]) - 1]} / ${
+    newDate[1]
+  }`;
+}
 function setStatus(status: boolean) {
   if (status == true) {
     return "products-list_marker_free";
@@ -92,9 +94,15 @@ function setStatus(status: boolean) {
     return "products-list_marker_busy";
   }
 }
-function setDate(date: string) {
-  const newDate = date.split("-");
-  return `${newDate[2]} / ${months[parseInt(newDate[1])]} / ${newDate[0]}`;
+function setDate(id: string | undefined) {
+  const date =
+    order.orders.find((order) =>
+      order.products.some((product) => product._id === id)
+    )?.date || "";
+  const newDate = date.split("/");
+  return `${newDate[0]} / ${months[parseFloat(newDate[1]) - 1]} / ${
+    newDate[1]
+  }`;
 }
 function setPrice(price: string, isDefault: boolean) {
   if (isDefault) {
@@ -102,12 +110,17 @@ function setPrice(price: string, isDefault: boolean) {
   }
   return `$${price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 }
-function setOrderTitle(title: string) {
+function setOrderTitle(id: string | undefined) {
+  const title =
+    order.orders.find((order) =>
+      order.products.some((product) => product._id === id)
+    )?.title || "";
   if (title.length > 40) {
     return title.slice(0, 40) + `...`;
   }
   return title;
 }
+
 function setProductTitle(title: string) {
   if (title.length > 25) {
     return title.slice(0, 25) + "...";
@@ -141,7 +154,7 @@ onMounted(() => {
     .products-list {
       cursor: pointer;
       display: grid;
-      grid-template-columns: 0.5fr 0.5fr 3fr 1.5fr 2.5fr 1fr 1.2fr 1fr 2fr 1.5fr 1fr;
+      grid-template-columns: 0.5fr 0.5fr 2fr 1.5fr 2.5fr 1fr 1.2fr 1.5fr 2fr 1.5fr 1fr;
       border: 0.5px solid rgb(169, 169, 169);
       border-radius: 4px;
       align-items: center;
@@ -183,32 +196,40 @@ onMounted(() => {
         flex-direction: column;
         &_start {
           margin: 0;
-          display: flex;
-          align-items: center;
-          flex-direction: row;
-          justify-content: space-between;
+          // display: flex;
+          // align-items: center;
+          // flex-direction: row;
+          // justify-content: space-between;
           font-size: 14px;
           font-weight: 500;
           color: rgb(122, 122, 122);
+          display: grid;
+    grid-template-columns: 1fr 5fr;
+            text-align: start;
           &_from {
             color: rgb(172, 170, 170);
             font-size: 12px;
             margin: 0;
+            text-align: start;
           }
         }
         &_end {
           margin: 0;
-          display: flex;
-          align-items: center;
-          flex-direction: row;
-          justify-content: space-between;
+          // display: flex;
+          // align-items: center;
+          // flex-direction: row;
+          // justify-content: space-between;
           font-size: 14px;
           font-weight: 500;
           color: rgb(122, 122, 122);
+          display: grid;
+    grid-template-columns: 1fr 5fr;
+          text-align: start;
           &_to {
             color: rgb(172, 170, 170);
             font-size: 12px;
             margin: 0;
+            text-align: start;
           }
         }
       }
@@ -239,6 +260,8 @@ onMounted(() => {
       }
       &_type {
         color: rgb(122, 122, 122);
+        display: flex;
+        padding-left: 10px;
       }
       &_order-title {
         color: rgb(122, 122, 122);
@@ -252,9 +275,9 @@ onMounted(() => {
       }
     }
     .products-list:hover {
-    box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
-    text-align: center;
-  }
+      box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
+      text-align: center;
+    }
   }
 }
 </style>

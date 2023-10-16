@@ -14,14 +14,13 @@ export const useOrder = defineStore("order", {
     orderId: "" as string,
     showModal: false as boolean,
     selectedType: "" as string | null,
-
   }),
   getters: {
     selectedOrder: (state): Order[] => {
       return state.orders.filter((item) => item._id == state.orderId).flat();
     },
     filteredProductsByType: (state) => {
-      if (state.selectedType == null || state.selectedType == '') {
+      if (state.selectedType == null || state.selectedType == "") {
         const filteredProduct = state.orders.map((i) => i.products);
         return filteredProduct.flat();
       } else {
@@ -31,8 +30,6 @@ export const useOrder = defineStore("order", {
         return filteredProduct.flat();
       }
     },
-    
-    
   },
   actions: {
     async createOrder(orderData: OrderDescription) {
@@ -55,14 +52,20 @@ export const useOrder = defineStore("order", {
     },
 
     async deleteProduct(id: string | undefined, order: Order[]) {
-      const updatedOrder = order.map((item) => {
-        const filteredProducts = item.products.filter(
+      const orderIndex = order.findIndex((order) =>
+        order.products.some((product) => product._id === id)
+      );
+
+      if (orderIndex !== -1) {
+        order[orderIndex].products = order[orderIndex].products.filter(
           (product) => product._id !== id
         );
-        item.products = filteredProducts;
-        return item;
-      });
-      await PutProduct(updatedOrder[0]);
+
+        const updatedOrder = order[orderIndex];
+        await PutProduct(updatedOrder);
+      } else {
+        console.log("Product not found");
+      }
     },
     async deleteSelectedOrdersProduct(id: string | undefined) {
       return this.deleteProduct(id, this.selectedOrder);
@@ -92,6 +95,5 @@ export const useOrder = defineStore("order", {
     setSelectedType(type: string | null) {
       this.selectedType = type;
     },
-    
   },
 });
