@@ -37,21 +37,12 @@
               <p v-if="product.status" class="product_status_free">Free</p>
               <p v-else class="product_status_repairing"> Repairing</p>
             </div>
-            <div class="product_delete">
-              <button @click="removeProduct(product._id)">
-                <img
-                  width="24"
-                  height="24"
-                  src="https://img.icons8.com/material/96/808080/trash--v1.png"
-                  alt="trash--v1"
-                />
-              </button>
-            </div>
+            <DeleteIcon @click="removeProduct(product._id)"/>
           </div>
           <hr v-show="product == item.products[item.products.length - 1]" />
         </div>
       </div>
-      <CreateProduct
+      <ProductCreate
         @closeNewProductWindow="closeNewProductWindow"
         :showModal="showModal"
       />
@@ -63,7 +54,8 @@
 <script setup lang="ts">
 import { useOrder } from "@/store/OrdersStore";
 import { ref } from "vue";
-import CreateProduct from "./CreateProduct.vue";
+import ProductCreate from "@/components/Products/ProductCreate.vue";
+import DeleteIcon from "@/UI/DeleteIcon.vue";
 const order = useOrder();
 const showModal = ref<boolean>(false);
 function setStatus(status: boolean) {
@@ -83,7 +75,7 @@ function openNewProductWindow() {
   showModal.value = true;
 }
 async function removeProduct(id: string | undefined) {
-  await order.deleteProduct(id);
+  await order.deleteSelectedOrdersProduct(id);
 }
 </script>
 

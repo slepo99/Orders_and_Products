@@ -1,6 +1,6 @@
 <template>
   <select v-model="selectedValue" class="select">
-    <option :value="null" disabled class="option">Select an option</option>
+    <option :value="null"  class="option">None</option>
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.label }}
     </option>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, watchEffect } from "vue";
+import { ref, defineEmits, watchEffect, onMounted } from "vue";
 
 const { options, selected } = defineProps(["options", "selected"]);
 const emit = defineEmits(["update:selected"]);
@@ -18,6 +18,9 @@ const selectedValue = ref(selected);
 watchEffect(() => {
   emit("update:selected", selectedValue.value);
 });
+onMounted(() => {
+  selectedValue.value = null
+})
 </script>
 
 <style lang="scss" scoped>

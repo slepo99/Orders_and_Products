@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, onBeforeUnmount } from "vue";
+import { months, days } from "@/helpers/mocks/DateMocks";
 interface Date {
   time: string;
   year: string;
@@ -43,30 +44,6 @@ const currentDateTime = reactive<Date>({
 });
 
 function getCurrentDate() {
-  const months: string[] = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const days: string[] = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
   const date = new Date();
   currentDateTime.time = date.toLocaleTimeString("en-US", {
     hour12: false,

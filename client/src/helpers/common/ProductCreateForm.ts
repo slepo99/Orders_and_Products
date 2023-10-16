@@ -4,7 +4,7 @@ import { useOrder } from "@/store/OrdersStore";
 const order = useOrder();
 
  export const productForm = reactive<ProductPost>({
-  serialNumber: 0,
+  serialNumber: '',
   status: true,
   photo: "",
   title: "",
@@ -16,12 +16,12 @@ const order = useOrder();
   },
   price: [
     {
-      value: 0,
+      value: '',
       symbol: "USD",
       isDefault: false,
     },
     {
-      value: 0,
+      value: '',
       symbol: "UAH",
       isDefault: true,
     },
@@ -31,7 +31,7 @@ const order = useOrder();
   isProductNew: true,
 });
  export const eraiseProductFields = () => {
-  productForm.serialNumber = 0
+  productForm.serialNumber = ''
   productForm.status = true
   productForm.photo = ''
   productForm.title = ''
@@ -39,8 +39,8 @@ const order = useOrder();
   productForm.specification = ''
   productForm.guarantee.start = ''
   productForm.guarantee.end = ''
-  productForm.price[0].value = 0
-  productForm.price[1].value = 0
+  productForm.price[0].value = ''
+  productForm.price[1].value = ''
 }
 
 

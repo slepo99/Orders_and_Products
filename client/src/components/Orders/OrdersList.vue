@@ -27,16 +27,7 @@
         <p class="price_usd">${{ totalUSDPrice(item.products) }}</p>
         <p class="price_uah">₴{{ totalUahPrice(item.products) }}</p>
       </div>
-      <div class="delete-box">
-        <button @click="openDeleteOrderWindow(item._id)" class="delete-box_btn">
-          <img
-            width="24"
-            height="24"
-            src="https://img.icons8.com/material/96/808080/trash--v1.png"
-            alt="trash--v1"
-          />
-        </button>
-      </div>
+      <DeleteIcon @click="openDeleteOrderWindow(item._id)"/>
     </div>
     <OrderRemove
       :currentOrderId="currentOrderId"
@@ -51,6 +42,7 @@ import { useOrder } from "@/store/OrdersStore";
 import { ProductGet } from "@/types/OrderTypes";
 import { onMounted, ref, computed } from "vue";
 import OrderRemove from "./OrderRemove.vue";
+import DeleteIcon from "@/UI/DeleteIcon.vue";
 
 const order = useOrder();
 const isActive = ref(false);
@@ -75,22 +67,28 @@ function openProductList(id: string) {
 const getTotalPriceInCurrency = (
   products: ProductGet[],
   currencySymbol: string
-): number => {
+): any => {
   return products.reduce((totalPrice, product) => {
     const currency = product.price.reduce((sum, priceItem) => {
       if (priceItem.symbol == currencySymbol) {
-        return sum + priceItem.value;
+        return sum + parseInt(priceItem.value);
       }
       return sum;
     }, 0);
+
     return totalPrice + currency;
   }, 0);
 };
+function setPrice(product: ProductGet[], currencySymbol: string) {
+  return getTotalPriceInCurrency(product, currencySymbol)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 const totalUSDPrice = computed(
-  () => (product: ProductGet[]) => getTotalPriceInCurrency(product, "USD")
+  () => (product: ProductGet[]) => setPrice(product, "USD")
 );
 const totalUahPrice = computed(
-  () => (product: ProductGet[]) => getTotalPriceInCurrency(product, "UAH")
+  () => (product: ProductGet[]) => setPrice(product, "UAH")
 );
 
 onMounted(() => {
@@ -232,5 +230,4 @@ onMounted(() => {
   }
 }
 </style>
-@/types/OrderType
-@/types/OrderTypes
+@/types/OrderType @/types/OrderTypes

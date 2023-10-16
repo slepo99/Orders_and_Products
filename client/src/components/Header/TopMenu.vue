@@ -29,11 +29,12 @@ import DateTimeDisplay from "./DateTimeDisplay.vue";
   position: fixed;
   top: 0;
   left: 0;
-  box-shadow: 0 3px 10px rgba(59, 59, 59, 0.2);
+  box-shadow: 0 3px 10px rgba(59, 59, 59, 0.5);
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   z-index: 2;
+  background-color: rgb(255, 255, 255);
 
   .info {
     display: flex;

@@ -20,7 +20,7 @@
 
 export interface ProductGet  {
   _id?: string;
-  serialNumber: number;
+  serialNumber: string;
   status: boolean;
   isProductNew: boolean;
   photo: string;
@@ -32,8 +32,8 @@ export interface ProductGet  {
     end: string;
   };
   price: [
-    { value: number; symbol: string; isDefault: boolean },
-    { value: number; symbol: string; isDefault: boolean }
+    { value: string; symbol: string; isDefault: boolean },
+    { value: string; symbol: string; isDefault: boolean }
   ];
   order: number;
   date: string;

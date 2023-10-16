@@ -13,11 +13,26 @@ export const useOrder = defineStore("order", {
     isActive: false as boolean,
     orderId: "" as string,
     showModal: false as boolean,
+    selectedType: "" as string | null,
+
   }),
   getters: {
-    selectedOrder(): Order[] {
-      return this.orders.filter((item) => item._id == this.orderId);
+    selectedOrder: (state): Order[] => {
+      return state.orders.filter((item) => item._id == state.orderId).flat();
     },
+    filteredProductsByType: (state) => {
+      if (state.selectedType == null || state.selectedType == '') {
+        const filteredProduct = state.orders.map((i) => i.products);
+        return filteredProduct.flat();
+      } else {
+        const filteredProduct = state.orders.map((i) => {
+          return i.products.filter((item) => item.type == state.selectedType);
+        });
+        return filteredProduct.flat();
+      }
+    },
+    
+    
   },
   actions: {
     async createOrder(orderData: OrderDescription) {
@@ -39,17 +54,22 @@ export const useOrder = defineStore("order", {
       await DeleteOrder(id);
     },
 
-    async deleteProduct(id: string | undefined) {
-      const order = this.selectedOrder.map((item) => {
+    async deleteProduct(id: string | undefined, order: Order[]) {
+      const updatedOrder = order.map((item) => {
         const filteredProducts = item.products.filter(
           (product) => product._id !== id
         );
         item.products = filteredProducts;
         return item;
       });
-      await PutProduct(order[0]);
+      await PutProduct(updatedOrder[0]);
     },
-
+    async deleteSelectedOrdersProduct(id: string | undefined) {
+      return this.deleteProduct(id, this.selectedOrder);
+    },
+    async deleteAnyProduct(id: string | undefined) {
+      return this.deleteProduct(id, this.orders);
+    },
     async createProduct(product: ProductPost) {
       const updatedOrder = this.selectedOrder.map((i) => {
         if (i) {
@@ -64,10 +84,14 @@ export const useOrder = defineStore("order", {
       this.isActive = isActive;
     },
     hideProducts() {
-      this.isActive = false
+      this.isActive = false;
     },
     getSelectedOrder(id: string) {
       this.orderId = id;
     },
+    setSelectedType(type: string | null) {
+      this.selectedType = type;
+    },
+    
   },
 });

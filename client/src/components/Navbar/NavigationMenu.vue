@@ -37,9 +37,10 @@
   position: fixed;
   left: 0;
   top: 0;
-  box-shadow: 0 3px 10px rgba(59, 59, 59, 0.2);
+  box-shadow: 0 3px 10px rgba(59, 59, 59, 0.5);
   z-index: 1;
   margin-top: 80px;
+  background-color: #ffffff;
   .user-params {
     position: relative;
     margin-top: 5vh;

@@ -13,3 +13,10 @@ export const status = [
     { value: "Graphic card", label: "Graphic card" },
     { value: "Storage", label: "Storage" },
   ];
+  export const type = [
+    { value: "Monitor", label: "Monitor" },
+    { value: "Processor", label: "Processor" },
+    { value: "Motherboard", label: "Motherboard" },
+    { value: "Graphic card", label: "Graphic card" },
+    { value: "Storage", label: "Storage" },
+  ];

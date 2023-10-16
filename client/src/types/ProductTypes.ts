@@ -1,5 +1,5 @@
 export interface ProductPost {
-    serialNumber: number;
+    serialNumber: string;
     status: boolean ;
     isProductNew: boolean ;
     photo: string;
@@ -11,8 +11,8 @@ export interface ProductPost {
       end: string;
     };
     price: [
-      { value: number; symbol: string; isDefault: boolean },
-      { value: number; symbol: string; isDefault: boolean }
+      { value: string; symbol: string; isDefault: boolean },
+      { value: string; symbol: string; isDefault: boolean }
     ];
     order: number;
     date: string;

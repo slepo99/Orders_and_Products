@@ -139,6 +139,7 @@ async function createProduct() {
     }
     await order.createProduct(productForm);
     eraiseProductFields()
+     await order.getOrders()
     emit("closeNewProductWindow");
   } catch (error) {
     console.log("Login error", error);
