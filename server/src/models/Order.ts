@@ -21,9 +21,9 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IProduct {
-  serialNumber: number;
-  isNew: boolean;
-  status: string;
+  serialNumber: string;
+  isProductNew: boolean;
+  status: boolean;
   photo: string;
   title: string;
   type: string;
@@ -33,8 +33,8 @@ export interface IProduct {
     end: string;
   };
   price: [
-    { value: number; symbol: string; isDefault: boolean },
-    { value: number; symbol: string; isDefault: boolean }
+    { value: string; symbol: string; isDefault: boolean },
+    { value: string; symbol: string; isDefault: boolean }
   ];
   order: number;
   date: string;
@@ -48,9 +48,9 @@ export interface IOrder extends Document {
 }
 
 const ProductSchema = new Schema<IProduct>({
-  serialNumber: { type: Number },
-  status: {type: String},
-  isNew: { type: Boolean },
+  serialNumber: { type: String },
+  status: {type: Boolean},
+  isProductNew: { type: Boolean },
   photo: { type: String },
   title: { type: String },
   type: { type: String },
@@ -61,12 +61,12 @@ const ProductSchema = new Schema<IProduct>({
   },
   price: [
     {
-      value: { type: Number },
+      value: { type: String },
       symbol: { type: String },
       isDefault: { type: Boolean },
     },
     {
-      value: { type: Number },
+      value: { type: String },
       symbol: { type: String },
       isDefault: { type: Boolean },
     },
