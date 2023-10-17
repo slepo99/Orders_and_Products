@@ -52,11 +52,13 @@
 </template>
 
 <script setup lang="ts">
-import { useOrder } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/OrdersStore";
+import { useProductsStore } from "@/store/productModule";
 import { ref } from "vue";
 import ProductCreate from "@/components/Products/ProductCreate.vue";
 import DeleteIcon from "@/UI/DeleteIcon.vue";
-const order = useOrder();
+const productsStore = useProductsStore()
+const order = useOrderStore();
 const showModal = ref<boolean>(false);
 function setStatus(status: boolean) {
   if (status == true) {
@@ -66,7 +68,7 @@ function setStatus(status: boolean) {
   }
 }
 function hideProducts() {
-order.hideProducts()
+productsStore.hideProducts()
 }
 function closeNewProductWindow() {
   showModal.value = false;
@@ -75,7 +77,7 @@ function openNewProductWindow() {
   showModal.value = true;
 }
 async function removeProduct(id: string | undefined) {
-  await order.deleteSelectedOrdersProduct(id);
+  await productsStore.deleteSelectedOrdersProduct(id);
 }
 </script>
 

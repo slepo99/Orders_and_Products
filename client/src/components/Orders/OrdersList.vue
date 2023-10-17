@@ -1,6 +1,6 @@
 <template>
-  <div :class="{ container_active: order.isActive }" class="container">
-    <div v-for="(item, id) in order.orders" :key="id" class="order-list">
+  <div :class="{ container_active: productsStore.isActive }" class="container">
+    <div v-for="(item, id) in order.searchOrder" :key="id" class="order-list">
       <div class="title-box">
         <p class="title">{{ item.title }}</p>
       </div>
@@ -38,13 +38,15 @@
 </template>
 
 <script setup lang="ts">
-import { useOrder } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/OrdersStore";
+import { useProductsStore } from "@/store/productModule";
 import { ProductGet } from "@/types/OrderTypes";
 import { onMounted, ref, computed } from "vue";
 import OrderRemove from "./OrderRemove.vue";
 import DeleteIcon from "@/UI/DeleteIcon.vue";
 
-const order = useOrder();
+const productsStore = useProductsStore()
+const order = useOrderStore();
 const isActive = ref(false);
 const showModal = ref(false);
 const currentOrderId = ref("");
@@ -58,7 +60,7 @@ function closeDeleteOrderWindow() {
 }
 function openProductList(id: string) {
   isActive.value = !isActive.value;
-  order.showProducts(isActive.value);
+  productsStore.showProducts(isActive.value);
   if (isActive.value) {
     order.getSelectedOrder(id);
   }

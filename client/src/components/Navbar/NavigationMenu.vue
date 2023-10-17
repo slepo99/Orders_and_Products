@@ -16,11 +16,11 @@
     </div>
     <div class="navigation-links">
       <div class="order">
-        <router-link to="/orders"><h4>ORDER</h4> </router-link>
+        <router-link to="/orders"><h4 >ORDER</h4> <div :class="{current_page: isOrderPage}"></div></router-link>
       </div>
       <div class="groups"><h4>GROUPS</h4></div>
       <div class="products">
-        <router-link to="/"><h4>PRODUCTS</h4></router-link>
+        <router-link to="/"><h4>PRODUCTS</h4> <div :class="{current_page: isProductPage}"></div></router-link>
       </div>
       <div class="users"><h4>USERS</h4></div>
       <div class="settings"><h4>SETTINGS</h4></div>
@@ -28,7 +28,23 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+const router = useRouter();
+const isOrderPage = computed(() => {
+  if(router.currentRoute.value.name == "orders") {
+    return true 
+  }
+  return false
+})
+const isProductPage = computed(() => {
+  if(router.currentRoute.value.name == "products") {
+    return true 
+  }
+  return false
+})
+</script>
 
 <style lang="scss" scoped>
 .wrapper {
@@ -70,9 +86,11 @@
     margin-top: 5vh;
     display: flex;
     flex-direction: column;
+    gap: 50px;
     div {
       display: flex;
       justify-content: center;
+      
       a {
         text-decoration: none;
       }
@@ -82,6 +100,7 @@
         font-size: 1.25rem;
         text-decoration: none;
         width: fit-content;
+        margin: 0;
       }
       h4::before {
         content: "";
@@ -97,6 +116,13 @@
       }
       h4::before {
         transition: width 0.35s;
+      }
+      .current_page {
+        height: 3px;
+        width: 100%;
+        background-color: green;
+        position: relative;
+        top: 2px;
       }
     }
   }

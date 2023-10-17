@@ -111,7 +111,8 @@
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
 import SelectList from "@/UI/SelectList.vue";
-import { useOrder } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/OrdersStore";
+import { useProductsStore } from "@/store/productModule";
 import { onMounted } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import productRules from "@/helpers/validations/ProductValidator";
@@ -121,7 +122,8 @@ import {
   specification,
 } from "@/helpers/mocks/ProductSelectMocks";
 import {productForm, eraiseProductFields} from "@/helpers/common/ProductCreateForm";
-const order = useOrder();
+const order = useOrderStore();
+const productsStore = useProductsStore()
 const props = defineProps({
   showModal: {
     type: Boolean,
@@ -137,7 +139,7 @@ async function createProduct() {
     if (v$.value.$invalid) {
       return;
     }
-    await order.createProduct(productForm);
+    await productsStore.createProduct(productForm);
     eraiseProductFields()
      await order.getOrders()
     emit("closeNewProductWindow");

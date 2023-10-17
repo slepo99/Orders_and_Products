@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 import { ProductPost } from "@/types/ProductTypes";
-import { useOrder } from "@/store/OrdersStore";
-const order = useOrder();
+import { useOrderStore } from "@/store/OrdersStore";
+const order = useOrderStore();
 
  export const productForm = reactive<ProductPost>({
   serialNumber: '',
@@ -42,5 +42,7 @@ const order = useOrder();
   productForm.price[0].value = ''
   productForm.price[1].value = ''
 }
+
+
 
 

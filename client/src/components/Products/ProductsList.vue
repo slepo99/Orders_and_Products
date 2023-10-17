@@ -2,7 +2,7 @@
   <div class="container">
     <div class="container-products">
       <div
-        v-for="product in order.filteredProductsByType"
+        v-for="product in productStore.searchProducts"
         :key="product._id"
         class="products-list"
       >
@@ -76,15 +76,18 @@
 </template>
 
 <script setup lang="ts">
-import { useOrder } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/OrdersStore";
+import { useProductsStore } from "@/store/productModule";
 import { onMounted } from "vue";
 import { months } from "@/helpers/mocks/DateMocks";
 import DeleteIcon from "@/UI/DeleteIcon.vue";
-const order = useOrder();
+const order = useOrderStore();
+const productStore = useProductsStore();
 function setGuarantee(date: string) {
-  const newDate = date.split('-');
+  const newDate = date.split("-");
+
   return `${newDate[0]} / ${months[parseFloat(newDate[1]) - 1]} / ${
-    newDate[1]
+    newDate[2]
   }`;
 }
 function setStatus(status: boolean) {
@@ -128,11 +131,10 @@ function setProductTitle(title: string) {
   return title;
 }
 async function removeProduct(id: string | undefined) {
-  await order.deleteAnyProduct(id);
+  await productStore.deleteAnyProduct(id);
 }
 onMounted(() => {
   order.getOrders();
-  console.log(Date.now().toString());
 });
 </script>
 
@@ -204,8 +206,8 @@ onMounted(() => {
           font-weight: 500;
           color: rgb(122, 122, 122);
           display: grid;
-    grid-template-columns: 1fr 5fr;
-            text-align: start;
+          grid-template-columns: 1fr 5fr;
+          text-align: start;
           &_from {
             color: rgb(172, 170, 170);
             font-size: 12px;
@@ -223,7 +225,7 @@ onMounted(() => {
           font-weight: 500;
           color: rgb(122, 122, 122);
           display: grid;
-    grid-template-columns: 1fr 5fr;
+          grid-template-columns: 1fr 5fr;
           text-align: start;
           &_to {
             color: rgb(172, 170, 170);

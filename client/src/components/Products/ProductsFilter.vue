@@ -1,7 +1,7 @@
 <template>
   <div class="container-filter">
     <div class="container-filter_quantity">
-      <h2>Products / {{ order.filteredProductsByType.length }}</h2>
+      <h2>Products / {{ productStore.filteredProductsByType.length }}</h2>
     </div>
     <div class="container-filter_type">
       <span>Type:</span>
@@ -20,13 +20,13 @@
 import SelectList from "@/UI/SelectList.vue";
 import {  type } from "@/helpers/mocks/ProductSelectMocks";
 import { ref } from "vue";
-import { useOrder } from "@/store/OrdersStore";
-const order = useOrder();
+import { useProductsStore } from "@/store/productModule";
+const productStore = useProductsStore();
 const selectedType = ref<string | null>('');
 
 
 const filterByType = () => {
-  return order.setSelectedType(selectedType.value);
+  return productStore.setSelectedType(selectedType.value);
 };
 </script>
 

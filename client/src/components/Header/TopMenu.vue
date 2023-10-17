@@ -9,6 +9,9 @@
       />
       <h2>INVENTORY</h2>
     </div>
+    <div class="search">
+      <SearchBar/>
+    </div>
     <div class="info">
       <DateTimeDisplay />
       <ActiveSessions />
@@ -19,13 +22,16 @@
 <script setup lang="ts">
 import ActiveSessions from "./ActiveSessions.vue";
 import DateTimeDisplay from "./DateTimeDisplay.vue";
+import SearchBar from "./SearchBar.vue";
 </script>
 
 <style lang="scss" scoped>
 .wrapper {
   width: 100%;
   height: 80px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  justify-items: start;
   position: fixed;
   top: 0;
   left: 0;

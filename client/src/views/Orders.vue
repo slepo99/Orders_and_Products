@@ -13,7 +13,7 @@
     <CreateOrder :showModal="showModal" @closeOrderWindow="closeOrderWindow"/>
     <div class="order_wrapper">
       <OrdersList />
-      <OrderedProducts v-if="order.isActive" />
+      <OrderedProducts v-if="productsStore.isActive" />
     </div>
   </div>
 </template>
@@ -22,12 +22,13 @@
 import CreateOrder from "@/components/Orders/CreateOrder.vue";
 import OrdersList from "@/components/Orders/OrdersList.vue";
 import OrderedProducts from "@/components/Orders/OrderedProducts.vue";
-import { useOrder } from "@/store/OrdersStore";
-
+import { useOrderStore } from "@/store/OrdersStore";
+import { useProductsStore } from "@/store/productModule";
+const productsStore = useProductsStore()
 import { ref, computed } from "vue";
 
 const showModal = ref<boolean>(false);
-const order = useOrder();
+const order = useOrderStore();
 
 function openNewOrderWindow() {
   showModal.value = true;

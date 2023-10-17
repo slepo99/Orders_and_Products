@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
-import { useOrder } from "@/store/OrdersStore";
-const order = useOrder();
+import { useOrderStore } from "@/store/OrdersStore";
+const order = useOrderStore();
 const props = defineProps({
   currentOrderId: {
     type: String,

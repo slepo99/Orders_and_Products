@@ -42,7 +42,7 @@
 import ModalWindow from "@/UI/ModalWindow.vue";
 import { OrderDescription } from "@/types/OrderTypes";
 import { reactive, onMounted, computed } from "vue";
-import { useOrder } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/OrdersStore";
 
 const props = defineProps({
   showModal: {
@@ -51,7 +51,7 @@ const props = defineProps({
   },
 });
 const emit = defineEmits()
-const order = useOrder();
+const order = useOrderStore();
 const getDate = computed<string>(() => {
   const date = new Date();
   return `${date.getDate().toString()} / ${(
