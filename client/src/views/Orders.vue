@@ -24,11 +24,14 @@ import OrdersList from "@/components/Orders/OrdersList.vue";
 import OrderedProducts from "@/components/Orders/OrderedProducts.vue";
 import { useOrderStore } from "@/store/OrdersStore";
 import { useProductsStore } from "@/store/productModule";
-const productsStore = useProductsStore()
 import { ref, computed } from "vue";
+const order = useOrderStore();
+const productsStore = useProductsStore()
+
+
 
 const showModal = ref<boolean>(false);
-const order = useOrderStore();
+
 
 function openNewOrderWindow() {
   showModal.value = true;

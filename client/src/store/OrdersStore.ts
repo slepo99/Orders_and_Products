@@ -15,7 +15,7 @@ export const useOrderStore = defineStore("order", {
       return state.orders.filter((item) => item._id == state.orderId).flat();
     },
     searchOrder: (state): Order[] => {
-      if (state.searchValue == null || state.searchValue == "") {
+      if (!state.searchValue) {
         return state.orders;
       } else {
         return state.orders.filter((item) => {

@@ -6,7 +6,12 @@
       type="text"
       @input="searchItem"
       placeholder="Search"
+      id="input"
     />
+    <label for="input">
+      <slot/>
+    </label>
+    
   </div>
 </template>
 
@@ -18,7 +23,7 @@ import { useOrderStore } from "@/store/OrdersStore";
 const orderStore = useOrderStore();
 const productsStore = useProductsStore();
 const router = useRouter();
-const searchValue = ref("");
+const searchValue = ref <string>("");
 function searchItem() {
   if (router.currentRoute.value.name == "products") {
     productsStore.setSearchValue(searchValue.value);

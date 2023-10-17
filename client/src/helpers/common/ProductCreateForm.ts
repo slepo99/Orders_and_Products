@@ -1,10 +1,13 @@
 import { reactive } from "vue";
 import { ProductPost } from "@/types/ProductTypes";
 import { useOrderStore } from "@/store/OrdersStore";
+import { setActivePinia, createPinia } from "pinia";
+setActivePinia(createPinia());
+
 const order = useOrderStore();
 
- export const productForm = reactive<ProductPost>({
-  serialNumber: '',
+export const productForm = reactive<ProductPost>({
+  serialNumber: "",
   status: true,
   photo: "",
   title: "",
@@ -16,12 +19,12 @@ const order = useOrderStore();
   },
   price: [
     {
-      value: '',
+      value: "",
       symbol: "USD",
       isDefault: false,
     },
     {
-      value: '',
+      value: "",
       symbol: "UAH",
       isDefault: true,
     },
@@ -30,19 +33,15 @@ const order = useOrderStore();
   date: Date.now().toString(),
   isProductNew: true,
 });
- export const eraiseProductFields = () => {
-  productForm.serialNumber = ''
-  productForm.status = true
-  productForm.photo = ''
-  productForm.title = ''
-  productForm.type = ''
-  productForm.specification = ''
-  productForm.guarantee.start = ''
-  productForm.guarantee.end = ''
-  productForm.price[0].value = ''
-  productForm.price[1].value = ''
-}
-
-
-
-
+export const eraiseProductFields = () => {
+  productForm.serialNumber = "";
+  productForm.status = true;
+  productForm.photo = "";
+  productForm.title = "";
+  productForm.type = "";
+  productForm.specification = "";
+  productForm.guarantee.start = "";
+  productForm.guarantee.end = "";
+  productForm.price[0].value = "";
+  productForm.price[1].value = "";
+};

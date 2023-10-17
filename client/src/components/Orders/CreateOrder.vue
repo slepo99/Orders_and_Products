@@ -142,4 +142,3 @@ onMounted(() => {});
   }
 }
 </style>
-@/types/OrderType@/types/OrderTypes
