@@ -1,18 +1,18 @@
 <template>
-  <div class="container">
-    <div class="date-section">
-      <div class="day-of-week">
+  <div class="date-time">
+    <div class="date-time__date">
+      <div class="date-time__day-of-week">
         <span>{{ currentDateTime.dayOfWeek }}</span>
       </div>
-      <div class="date-info">
-        <span>{{ currentDateTime.day }} &nbsp</span>
-        <span>{{ currentDateTime.month }},&nbsp</span>
+      <div class="date-time__date-info">
+        <span>{{ currentDateTime.day }}</span>
+        <span>{{ currentDateTime.month }}</span>
         <span>{{ currentDateTime.year }}</span>
       </div>
     </div>
 
-    <div class="time-section">
-      <span class="time-icon">
+    <div class="date-time__time">
+      <span class="date-time__time-icon">
         <img
           width="18"
           height="18"
@@ -20,7 +20,7 @@
           alt="time-machine--v1"
         />
       </span>
-      <span class="time"> {{ currentDateTime.time }}</span>
+      <span class="date-time__time-text">{{ currentDateTime.time }}</span>
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, onBeforeUnmount } from "vue";
 import { months, days } from "@/helpers/mocks/DateMocks";
+
 interface Date {
   time: string;
   year: string;
@@ -35,6 +36,7 @@ interface Date {
   day: string;
   dayOfWeek: string;
 }
+
 const currentDateTime = reactive<Date>({
   time: "",
   year: "",
@@ -55,11 +57,14 @@ function getCurrentDate() {
   currentDateTime.month = months[date.getMonth()].slice(0, 3);
   currentDateTime.dayOfWeek = days[(date.getDay() + 6) % 7];
 }
+
 let intervalId: NodeJS.Timeout | null = null;
+
 onMounted(() => {
   getCurrentDate();
   intervalId = setInterval(getCurrentDate, 1000);
 });
+
 onBeforeUnmount(() => {
   if (intervalId !== null) {
     clearInterval(intervalId);
@@ -68,30 +73,35 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.date-time {
   display: flex;
   align-items: flex-end;
   gap: 15px;
-  .date-section {
+
+  &__date {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     span {
       font-size: 14px;
       font-weight: 600;
     }
   }
-  .time-section {
+
+  &__time {
     display: flex;
     gap: 3px;
-    .time {
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .time-icon {
+
+    &-icon {
       font-size: 18px;
       display: flex;
       align-items: center;
+    }
+
+    &-text {
+      font-size: 14px;
+      font-weight: 600;
     }
   }
 }

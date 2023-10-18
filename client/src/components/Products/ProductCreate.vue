@@ -1,7 +1,7 @@
 <template>
   <ModalWindow :showModal="props.showModal">
     <div class="close-dialog">
-      <button class="close-dialog_btn" @click="closeDialog">
+      <button class="close-dialog-btn" @click="closeDialog">
         <img
           width="30"
           height="30"
@@ -11,17 +11,17 @@
       </button>
     </div>
     <div class="container-new-product">
-      <div class="container-new-product_title">
+      <div class="container-new-product-title">
         <h2>Fill in all fields to create a product:</h2>
       </div>
-      <div class="container-new-product_form">
+      <div class="container-new-product-form">
         <form>
-          <div class="container-new-product_form_title">
+          <div class="container-new-product-form-title">
             <label for="title"> Prodcut name: </label>
             <input type="text" id="title" v-model="productForm.title" />
           </div>
 
-          <div class="container-new-product_form_serial">
+          <div class="container-new-product-form-serial">
             <label for="serial"> Serial number: </label>
             <input
               type="number"
@@ -30,27 +30,27 @@
             />
           </div>
 
-          <div class="container-new-product_form_photo">
+          <div class="container-new-product-form-photo">
             <label for="photo"> Photo url:</label>
             <input type="text" id="photo" v-model="productForm.photo" />
           </div>
 
-          <div class="container-new-product_form_type">
+          <div class="container-new-product-form-type">
             <span> Choose type: </span>
             <SelectList :options="specification" v-model="productForm.type" />
           </div>
 
-          <div class="container-new-product_form_status">
+          <div class="container-new-product-form-status">
             <span>Product status:</span>
             <SelectList :options="status" v-model="productForm.status" />
           </div>
 
-          <div class="container-new-product_form_isnew">
+          <div class="container-new-product-form-isnew">
             <span>Is product new</span>
             <SelectList :options="isNew" v-model="productForm.isProductNew" />
           </div>
 
-          <div class="container-new-product_form_specification">
+          <div class="container-new-product-form-specification">
             <span>Choose specification:</span>
             <SelectList
               :options="specification"
@@ -58,7 +58,7 @@
             />
           </div>
 
-          <div class="container-new-product_form_guarantee-start">
+          <div class="container-new-product-form-guarantee-start">
             <label for="guarantee_start"> Guarantee start date:</label>
             <input
               type="date"
@@ -76,7 +76,7 @@
               id="guarantee_end"
             />
           </div>
-          <div class="container-new-product_form_price-usd">
+          <div class="container-new-product-form-price-usd">
             <label for="price_usd"> Enter price in USD: </label>
             <input
               type="text"
@@ -84,7 +84,7 @@
               id="price_usd"
             />
           </div>
-          <div class="container-new-product_form_price-uah">
+          <div class="container-new-product-form-price-uah">
             <label for="price_auh"> Enter price in UAH: </label>
 
             <input
@@ -95,7 +95,7 @@
           </div>
         </form>
       </div>
-      <div class="container-new-product_form_btn">
+      <div class="container-new-product-form-btn">
         <button
           :disabled="v$.$invalid"
           @click.prevent="createProduct"
@@ -121,9 +121,12 @@ import {
   isNew,
   specification,
 } from "@/helpers/mocks/ProductSelectMocks";
-import {productForm, eraiseProductFields} from "@/helpers/common/ProductCreateForm";
+import {
+  productForm,
+  eraiseProductFields,
+} from "@/helpers/common/ProductCreateForm";
 const order = useOrderStore();
-const productsStore = useProductsStore()
+const productsStore = useProductsStore();
 const props = defineProps({
   showModal: {
     type: Boolean,
@@ -140,8 +143,8 @@ async function createProduct() {
       return;
     }
     await productsStore.createProduct(productForm);
-    eraiseProductFields()
-     await order.getOrders()
+    eraiseProductFields();
+    await order.getOrders();
     emit("closeNewProductWindow");
   } catch (error) {
     console.log("Login error", error);
@@ -163,7 +166,7 @@ onMounted(() => {
   justify-content: flex-end;
   align-items: center;
   background-color: black;
-  &_btn {
+  &-btn {
     background: none;
     border: none;
     display: flex;
@@ -173,7 +176,7 @@ onMounted(() => {
 }
 .container-new-product {
   padding: 50px;
-  &_title {
+  &-title {
     h2 {
       color: black;
     }
@@ -216,8 +219,8 @@ onMounted(() => {
       font-size: 12px;
     }
   }
-  &_form {
-    &_btn {
+  &-form {
+    &-btn {
       margin-top: 40px;
       button {
         width: 140px;

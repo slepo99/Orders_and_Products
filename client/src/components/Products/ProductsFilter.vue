@@ -1,29 +1,27 @@
 <template>
-  <div class="container-filter">
-    <div class="container-filter_quantity">
+  <div class="container_filter">
+    <div class="container_filter-quantity">
       <h2>Products / {{ productStore.filteredProductsByType.length }}</h2>
     </div>
-    <div class="container-filter_type">
+    <div class="container_filter-type">
       <span>Type:</span>
       <SelectList
         @change="filterByType"
         :options="type"
         v-model="selectedType"
-        class="container-filter_type_select"
+        class="container_filter-type-select"
       />
     </div>
-    
   </div>
 </template>
 
 <script setup lang="ts">
 import SelectList from "@/UI/SelectList.vue";
-import {  type } from "@/helpers/mocks/ProductSelectMocks";
+import { type } from "@/helpers/mocks/ProductSelectMocks";
 import { ref } from "vue";
 import { useProductsStore } from "@/store/productModule";
 const productStore = useProductsStore();
-const selectedType = ref<string | null>('');
-
+const selectedType = ref<string | null>("");
 
 const filterByType = () => {
   return productStore.setSelectedType(selectedType.value);
@@ -31,7 +29,7 @@ const filterByType = () => {
 </script>
 
 <style lang="scss" scoped>
-.container-filter {
+.container_filter {
   display: flex;
   position: relative;
   left: 60px;
@@ -40,11 +38,11 @@ const filterByType = () => {
   justify-content: space-evenly;
   align-items: center;
   margin-top: 20px;
-  &_type {
+  &-type {
     display: flex;
     gap: 10px;
     align-items: center;
-    &_select {
+    &-select {
       border: 1px solid rgb(145, 145, 145);
       background-color: white;
       width: 150px;
@@ -58,7 +56,7 @@ const filterByType = () => {
         width: 150px;
       }
     }
-    &_select:hover {
+    &-select:hover {
       border: 1px solid rgb(145, 145, 145);
       border: 1px solid rgb(145, 145, 145);
       background-color: white;
@@ -66,42 +64,7 @@ const filterByType = () => {
       height: 20px;
       border-radius: 8px;
     }
-    &_select:focus {
-      border: 1px solid rgb(145, 145, 145);
-      border: 1px solid rgb(145, 145, 145);
-      background-color: white;
-      width: 150px;
-      height: 20px;
-      border-radius: 8px;
-    }
-  }
-  &_spec {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    &_select {
-      border: 1px solid rgb(145, 145, 145);
-      background-color: white;
-      width: 150px;
-      height: 20px;
-      border-radius: 8px;
-      padding: 0;
-      font-size: 12px;
-      font-weight: 600;
-      option {
-        height: 20px;
-        width: 150px;
-      }
-    }
-    &_select:hover {
-      border: 1px solid rgb(145, 145, 145);
-      border: 1px solid rgb(145, 145, 145);
-      background-color: white;
-      width: 150px;
-      height: 20px;
-      border-radius: 8px;
-    }
-    &_select:focus {
+    &-select:focus {
       border: 1px solid rgb(145, 145, 145);
       border: 1px solid rgb(145, 145, 145);
       background-color: white;

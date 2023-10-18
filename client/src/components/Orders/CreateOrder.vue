@@ -1,38 +1,38 @@
 <template>
   <ModalWindow :showModal="props.showModal">
-    <div class="close-dialog">
-      <button class="close-dialog_btn" @click="closeDialog">
-        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/60/7DAE33/delete-sign.png" alt="delete-sign"/>
+    <div class="modal-window__close-dialog">
+      <button class="close-dialog__btn" @click="closeDialog">
+        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/60/7DAE33/delete-sign.png" alt="delete-sign" />
       </button>
     </div>
-    <div class="container-title">
+    <div class="modal-window__container-title">
       <h1>Order creation</h1>
     </div>
-    <div class="container-form">
+    <div class="modal-window__container-form">
       <form @submit.prevent="createOrder" class="form">
-        <div class="title">
+        <div class="form__title">
           <span>Enter order title:</span>
           <label for="title">
             <input
               type="text"
-              class="input-title"
+              class="input input-title"
               id="title"
               v-model="orderForm.title"
             />
           </label>
         </div>
-        <div class="description">
+        <div class="form__description">
           <span>Enter order description:</span>
           <label for="description">
             <input
-              class="input-description"
+              class="input input-description"
               type="text"
               id="description"
               v-model="orderForm.description"
             />
           </label>
         </div>
-        <button type="submit" class="submit-btn">Create order</button>
+        <button type="submit" class="form__submit-btn">Create order</button>
       </form>
     </div>
   </ModalWindow>
@@ -77,21 +77,21 @@ onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>
-.close-dialog {
+.modal-window__close-dialog {
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   background-color: black;
-  &_btn {
-    background: none;
+  .close-dialog__btn {
+    background: black;
     border: none;
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 }
-.container-form {
+.modal-window__container-form {
   padding: 20px 100px 100px 100px;
   form {
     display: flex;
@@ -106,7 +106,7 @@ onMounted(() => {});
         font-size: 22px;
         font-weight: 700;
       }
-      input {
+      .input {
         border: 0;
         border-bottom: 1px solid #555;
         background: transparent;
@@ -115,18 +115,18 @@ onMounted(() => {});
         font-size: 16px;
         color: #fff;
       }
-      input:focus {
+      .input:focus {
         border: none;
         outline: none;
         border-bottom: 1px solid #7fe6ed;
       }
-      input:focus ~ label,
-      input:valid ~ label {
+      .input:focus ~ label,
+      .input:valid ~ label {
         top: -12px;
         font-size: 12px;
       }
     }
-    button {
+    button.form__submit-btn {
       width: 150px;
       height: 50px;
       cursor: pointer;
@@ -134,10 +134,10 @@ onMounted(() => {});
       border: none;
       border-radius: 6px;
       font-size: 18px;
-    }
-    button:hover {
-      background-color: white;
-      color: black;
+      &:hover {
+        background-color: white;
+        color: black;
+      }
     }
   }
 }

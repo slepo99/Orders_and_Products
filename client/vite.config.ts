@@ -1,12 +1,17 @@
 import { defineConfig } from "vite";
+import type { InlineConfig } from "vitest";
+import type { UserConfig } from "vite";
+interface VitestConfigExport extends UserConfig {
+  test: InlineConfig;
+}
 import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [vue()],
-  
+
   base: "/",
   server: {
-    port: 8080, 
+    port: 8080,
   },
   resolve: {
     alias: {
@@ -19,6 +24,5 @@ export default defineConfig({
     transformMode: {
       web: [/.[tj]sx$/],
     },
-  }
-
-});
+  },
+} as VitestConfigExport);

@@ -198,10 +198,6 @@ onMounted(() => {
         flex-direction: column;
         &_start {
           margin: 0;
-          // display: flex;
-          // align-items: center;
-          // flex-direction: row;
-          // justify-content: space-between;
           font-size: 14px;
           font-weight: 500;
           color: rgb(122, 122, 122);
@@ -217,10 +213,6 @@ onMounted(() => {
         }
         &_end {
           margin: 0;
-          // display: flex;
-          // align-items: center;
-          // flex-direction: row;
-          // justify-content: space-between;
           font-size: 14px;
           font-weight: 500;
           color: rgb(122, 122, 122);

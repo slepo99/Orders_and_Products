@@ -1,9 +1,9 @@
 <template>
   <div>
     <ModalWindow :showModal="props.showModal">
-      <div class="delete-box_window">
+      <div class="delete-box-window">
         <h2>Are you sure you want to delete order ?</h2>
-        <div class="delete-box_window_btns">
+        <div class="delete-box-window-btns">
           <button @click="removeOrder(currentOrderId)">Yes</button>
           <button @click="closeDeleteOrderWindow">No</button>
         </div>
@@ -38,9 +38,9 @@ async function removeOrder(id: string) {
 </script>
 
 <style lang="scss" scoped>
-.delete-box_window {
+.delete-box-window {
   padding: 30px;
-  &_btns {
+  &-btns {
     margin-top: 50px;
     display: flex;
     align-items: center;

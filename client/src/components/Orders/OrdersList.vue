@@ -1,14 +1,14 @@
 <template>
   <div :class="{ container_active: productsStore.isActive }" class="container">
     <div v-for="(item, id) in order.searchOrder" :key="id" class="order-list">
-      <div class="title-box">
-        <p class="title">{{ item.title }}</p>
+      <div class="order-list__title-box">
+        <p class="order-list__title-box--title">{{ item.title }}</p>
       </div>
 
-      <div class="details-box">
+      <div class="order-list__details-box">
         <button @click="openProductList(item._id)">
           <img
-            class="details"
+            class="order-list__details-box--details"
             width="24"
             height="24"
             src="https://img.icons8.com/material/96/808080/list--v1.png"
@@ -16,18 +16,21 @@
           />
         </button>
       </div>
-      <div class="quantity-box">
-        <p class="quantity">{{ item.products?.length }} products</p>
+      <div class="order-list__quantity-box">
+        <p class="order-list__quantity">{{ item.products?.length }} products</p>
       </div>
-      <div class="date-box">
-        <p class="date">{{ item.date }}</p>
+      <div class="order-list__date-box">
+        <p class="order-list__date-box-date">{{ item.date }}</p>
       </div>
 
-      <div class="price-box">
-        <p class="price_usd">${{ totalUSDPrice(item.products) }}</p>
-        <p class="price_uah">₴{{ totalUahPrice(item.products) }}</p>
+      <div class="order-list__price-box">
+        <p class="order-list__price-usd">${{ totalUSDPrice(item.products) }}</p>
+        <p class="order-list__price-uah">₴{{ totalUahPrice(item.products) }}</p>
       </div>
-      <DeleteIcon @click="openDeleteOrderWindow(item._id)"/>
+      <DeleteIcon
+        class="order-list__delete-box"
+        @click="openDeleteOrderWindow(item._id)"
+      />
     </div>
     <OrderRemove
       :currentOrderId="currentOrderId"
@@ -45,7 +48,7 @@ import { onMounted, ref, computed } from "vue";
 import OrderRemove from "./OrderRemove.vue";
 import DeleteIcon from "@/UI/DeleteIcon.vue";
 
-const productsStore = useProductsStore()
+const productsStore = useProductsStore();
 const order = useOrderStore();
 const isActive = ref(false);
 const showModal = ref(false);
@@ -120,28 +123,23 @@ onMounted(() => {
     align-content: center;
     cursor: pointer;
     background-color: #fff;
-    .title-box {
-      .title {
+    &__title-box {
+      &--title {
         font-size: 19px;
-        color: gray;
       }
     }
 
-    .quantity-box {
-      .quantity {
-        font-size: 19px;
-        color: gray;
-      }
+    &__quantity {
+      font-size: 19px;
     }
-    .date-box {
-      .date {
-        color: gray;
+    &__date-box {
+      &-date {
         font-size: 14px;
         font-weight: 600;
       }
     }
 
-    .details-box {
+    &__details-box {
       display: flex;
       width: 100%;
       justify-content: center;
@@ -151,38 +149,25 @@ onMounted(() => {
         border: none;
         cursor: pointer;
       }
-      .details {
-        border: 2px solid rgb(210, 210, 210);
+      &--details {
+        border: 2px solid rgb(193, 193, 193);
         border-radius: 20px;
         padding: 5px;
       }
     }
-    .price-box {
+    &__price-box {
       display: flex;
       flex-direction: column;
       width: 100%;
       align-items: center;
-      p {
-        color: gray;
-        margin: 0;
-      }
     }
-    .delete-box {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
+    &__price-usd {
+      margin: 0;
+    }
+    &__price-uah {
+      margin: 0;
+    }
 
-      &_btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-      }
-      &_btn:hover img {
-        height: 30px;
-        width: 30px;
-      }
-    }
     p {
       font-weight: 600;
     }
@@ -213,23 +198,21 @@ onMounted(() => {
     align-items: center;
     align-content: center;
     cursor: pointer;
-    .title-box,
-    .price-box,
-    .delete-box {
-      // transition: opacity 1s ease-in-out;
-      // opacity: 0;
+
+    &__title-box,
+    &__price-box,
+    &__delete-box {
       display: none;
     }
-    .quantity-box,
-    .date-box {
+    &__quantity-box,
+    &__date-box {
       padding: 0 10px 0 10px;
     }
-    .date-box {
+    &__date-box {
       height: 80%;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
     }
   }
 }
 </style>
-@/types/OrderType @/types/OrderTypes

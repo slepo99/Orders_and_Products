@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <div class="logo">
+  <div class="header">
+    <div class="header__logo">
       <img
         width="66"
         height="66"
@@ -9,10 +9,10 @@
       />
       <h2>INVENTORY</h2>
     </div>
-    <div class="search">
-      <SearchBar/>
+    <div class="header__search">
+      <SearchBar />
     </div>
-    <div class="info">
+    <div class="header__info">
       <DateTimeDisplay />
       <ActiveSessions />
     </div>
@@ -26,7 +26,7 @@ import SearchBar from "./SearchBar.vue";
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+.header {
   width: 100%;
   height: 80px;
   display: grid;
@@ -42,20 +42,21 @@ import SearchBar from "./SearchBar.vue";
   z-index: 2;
   background-color: rgb(255, 255, 255);
 
-  .info {
+  &__info {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     margin-right: 40px;
     gap: 40px;
   }
-  .logo {
+
+  &__logo {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-left: 20px;
-    h1 {
+
+    h2 {
       margin: 0;
     }
   }
