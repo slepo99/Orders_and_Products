@@ -85,7 +85,6 @@ const order = useOrderStore();
 const productStore = useProductsStore();
 function setGuarantee(date: string) {
   const newDate = date.split("-");
-
   return `${newDate[0]} / ${months[parseFloat(newDate[1]) - 1]} / ${
     newDate[2]
   }`;

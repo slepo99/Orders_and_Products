@@ -6,13 +6,14 @@
       </div>
 
       <div class="order-list__details-box">
-        <button @click="openProductList(item._id)">
+        <button @click="openProductList(item._id)" >
           <img
             class="order-list__details-box--details"
+            data-testid="open-products"
             width="24"
             height="24"
             src="https://img.icons8.com/material/96/808080/list--v1.png"
-            alt="list--v1"
+            alt="details"
           />
         </button>
       </div>
@@ -28,6 +29,7 @@
         <p class="order-list__price-uah">₴{{ totalUahPrice(item.products) }}</p>
       </div>
       <DeleteIcon
+        data-testid="order-remove"
         class="order-list__delete-box"
         @click="openDeleteOrderWindow(item._id)"
       />
@@ -36,6 +38,7 @@
       :currentOrderId="currentOrderId"
       :showModal="showModal"
       @closeDeleteOrderWindow="closeDeleteOrderWindow"
+      
     />
   </div>
 </template>

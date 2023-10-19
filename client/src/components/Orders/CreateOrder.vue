@@ -9,7 +9,7 @@
       <h1>Order creation</h1>
     </div>
     <div class="modal-window__container-form">
-      <form @submit.prevent="createOrder" class="form">
+      <form @submit.prevent="createOrder" class="form" data-testid="form">
         <div class="form__title">
           <span>Enter order title:</span>
           <label for="title">
@@ -18,6 +18,7 @@
               class="input input-title"
               id="title"
               v-model="orderForm.title"
+              placeholder="Title"
             />
           </label>
         </div>
@@ -25,6 +26,7 @@
           <span>Enter order description:</span>
           <label for="description">
             <input
+              placeholder="Description"
               class="input input-description"
               type="text"
               id="description"

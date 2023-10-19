@@ -7,6 +7,7 @@
       <span>Type:</span>
       <SelectList
         @change="filterByType"
+        data-testid="select-list"
         :options="type"
         v-model="selectedType"
         class="container_filter-type-select"

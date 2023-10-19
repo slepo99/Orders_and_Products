@@ -5,7 +5,7 @@
             width="24"
             height="24"
             src="https://img.icons8.com/material/96/808080/trash--v1.png"
-            alt="trash--v1"
+            alt="trash"
           />
         </button>
     </div>

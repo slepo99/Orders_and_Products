@@ -5,8 +5,8 @@
         <span>{{ currentDateTime.dayOfWeek }}</span>
       </div>
       <div class="date-time__date-info">
-        <span>{{ currentDateTime.day }}</span>
-        <span>{{ currentDateTime.month }}</span>
+        <span>{{ currentDateTime.day }} &nbsp;</span>
+        <span>{{ currentDateTime.month }},&nbsp;</span>
         <span>{{ currentDateTime.year }}</span>
       </div>
     </div>

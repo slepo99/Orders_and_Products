@@ -1,5 +1,5 @@
 <template>
-  <div class="container-products">
+  <div class="container-products" data-testid="add">
     <div class="container-products__close-dialog">
       <button
         class="container-products__close-dialog-btn"
@@ -21,8 +21,12 @@
         @click="openNewProductWindow"
         class="container-products__add-product"
       >
-        <button class="container-products__add-product-btn">
+        <button
+          class="container-products__add-product-btn"
+          data-testid="add-new-product"
+        >
           <img
+          
             width="22"
             height="22"
             src="https://img.icons8.com/color/96/add--v1.png"
@@ -34,7 +38,7 @@
       <div class="container-products__product-wrapper">
         <div v-for="product in item.products" :key="product._id">
           <hr />
-          <div class="container-products__product">
+          <div class="container-products__product" data-testid="product">
             <div
               :class="setStatus(product.status)"
               class="container-products__product-status-dot"
@@ -67,6 +71,7 @@
         </div>
       </div>
       <ProductCreate
+        data-testid="modal"
         @closeNewProductWindow="closeNewProductWindow"
         :showModal="showModal"
       />

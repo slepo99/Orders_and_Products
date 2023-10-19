@@ -15,6 +15,7 @@
     </div>
     <div class="sidebar__navigation-links">
       <router-link
+      data-testid="order"
         to="/orders"
         :class="{ 'sidebar__link--active': isOrderPage }"
         class="sidebar__link"
@@ -25,6 +26,7 @@
         <h4>GROUPS</h4>
       </div>
       <router-link
+      data-testid="products"
         to="/"
         :class="{ 'sidebar__link--active': isProductPage }"
         class="sidebar__link"
@@ -47,8 +49,7 @@ import { computed } from "vue";
 
 const router = useRouter();
 const isOrderPage = computed(() => router.currentRoute.value.name === "orders");
-const isProductPage = computed(
-  () => router.currentRoute.value.name === "products"
+const isProductPage = computed(() => router.currentRoute.value.name === "products"
 );
 </script>
 

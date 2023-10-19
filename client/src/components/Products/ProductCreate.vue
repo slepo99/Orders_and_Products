@@ -1,6 +1,6 @@
 <template>
   <ModalWindow :showModal="props.showModal">
-    <div class="close-dialog">
+    <div class="close-dialog" data-testid="create">
       <button class="close-dialog-btn" @click="closeDialog">
         <img
           width="30"
@@ -17,13 +17,14 @@
       <div class="container-new-product-form">
         <form>
           <div class="container-new-product-form-title">
-            <label for="title"> Prodcut name: </label>
-            <input type="text" id="title" v-model="productForm.title" />
+            <label for="title"> Product name: </label>
+            <input placeholder="Name" type="text" id="title" v-model="productForm.title" />
           </div>
 
           <div class="container-new-product-form-serial">
             <label for="serial"> Serial number: </label>
             <input
+              placeholder="Serial"
               type="number"
               id="serial"
               v-model="productForm.serialNumber"
@@ -31,8 +32,8 @@
           </div>
 
           <div class="container-new-product-form-photo">
-            <label for="photo"> Photo url:</label>
-            <input type="text" id="photo" v-model="productForm.photo" />
+            <label for="Photo"> Photo url:</label>
+            <input placeholder="photo" type="text" id="photo" v-model="productForm.photo" />
           </div>
 
           <div class="container-new-product-form-type">
@@ -79,6 +80,7 @@
           <div class="container-new-product-form-price-usd">
             <label for="price_usd"> Enter price in USD: </label>
             <input
+              placeholder="$"
               type="text"
               v-model="productForm.price[0].value"
               id="price_usd"
@@ -88,6 +90,7 @@
             <label for="price_auh"> Enter price in UAH: </label>
 
             <input
+              placeholder="₴"
               type="text"
               id="price_uah"
               v-model="productForm.price[1].value"
