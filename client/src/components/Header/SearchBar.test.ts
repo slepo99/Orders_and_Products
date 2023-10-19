@@ -7,6 +7,11 @@ import router from "@/router";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.restoreAllMocks()
+});
 describe("Input", () => {
   test("updates the search value when typing in the input", async () => {
     const { getByPlaceholderText } = render(SearchBar, {

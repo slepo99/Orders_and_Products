@@ -4,6 +4,11 @@ import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.restoreAllMocks()
+});
 describe("Create Order", () => {
   test("should render the component", async () => {
     const { getByText, container, getByTestId } = render(CreateOrderVue, {

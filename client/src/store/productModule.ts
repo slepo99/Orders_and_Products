@@ -45,7 +45,12 @@ export const useProductsStore = defineStore("products", {
         );
 
         const updatedOrder = order[orderIndex];
-        await PutProduct(updatedOrder);
+        try {
+          await PutProduct(updatedOrder);
+        } catch (error) {
+          console.error("Failed to delete product");
+          throw error;
+        }
       } else {
         console.log("Product not found");
       }
@@ -66,7 +71,12 @@ export const useProductsStore = defineStore("products", {
         }
         return i;
       });
-      await PutProduct(updatedOrder[0]);
+      try {
+        await PutProduct(updatedOrder[0]);
+      } catch (error) {
+        console.error("Failed to create product");
+        throw error;
+      }
     },
 
     showProducts(isActive: boolean) {

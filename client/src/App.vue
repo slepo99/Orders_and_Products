@@ -1,7 +1,8 @@
 <template>
   <div>
-    <TopMenu />
     <NavigationMenu />
+    <TopMenu />
+   
     <router-view v-slot="{ Component }">
         <transition name="route" mode="out-in">
           <component :is="Component"></component>

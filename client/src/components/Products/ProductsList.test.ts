@@ -1,70 +1,53 @@
-// import ProductsList from "./ProductsList.vue";
-// import Products from "@/views/Products.vue";
-// import { useProductsStore } from "@/store/productModule";
-// import { render, fireEvent ,screen } from "@testing-library/vue";
-// import { setActivePinia, createPinia } from "pinia";
+import { render, screen, fireEvent } from '@testing-library/vue'
+import ProductsList from './ProductsList.vue'
+import { setActivePinia, createPinia } from "pinia";
+beforeEach(() => {
+  setActivePinia(createPinia());
+});
+describe('Products List', () => {
+  it('должен правильно рендерить компонент и взаимодействовать с ним', async () => {
+    const productStore = {
+      searchProducts: [
+        {
+          _id: '1',
+          title: 'Product 1',
+        },
+      ],
+    }
 
-// beforeEach(() => {
-//   useProductsStore()
-//   setActivePinia(createPinia());
-// });
-// describe("Product list", () => {
-  
-//   test("should render product list", async () => {
-//     render(ProductsList);
-//     expect(ProductsList).not.toBeNull();
-// screen.debug()
-//   });
+    const useOrderStoreMock = {
+      orders: [
+        {
+          products: [
+            { _id: '1', date: '2023-10-19' },
+          ],
+          title: 'Order 1',
+        },
+      ],
+      getOrders: vi.fn(),
+    }
 
-//   test("should render product list with data", async () => {
-//     const product = useProductsStore()
-//     // const productData = [
-//     //   {
-//     //     _id: "1",
-//     //     status: true,
-//     //     title: "Product 1",
-//     //     serialNumber: "12345",
-//     //     isProductNew: true,
-//     //     price: [
-//     //       { value: "100", isDefault: true },
-//     //       { value: "80", isDefault: false },
-//     //     ],
-//     //   },
-//     //   {
-        
-//     //     _id: "2",
-//     //     status: false,
-//     //     title: "Product 2",
-//     //     serialNumber: "54321",
-//     //     isProductNew: false,
-//     //     price: [
-//     //       { value: "75", isDefault: true },
-//     //       { value: "60", isDefault: false },
-//     //     ],
-//     //   },
-//     // ];
-//     render(Products)
-//     const { getByText, getByAltText } = render(ProductsList, {
-//      props: {
-//       productStore: {
-//         searchProducts: product,
-//       },
-//      }
-//     });
+    const { getByText, getByTestId, queryByText, queryByTestId } = render(ProductsList, {
+      data() {
+        return {
+          productStore,
+        }
+      },
+      global: {
+        provide: {
+          useOrderStore: useOrderStoreMock,
+        },
+      },
+    })
 
-//     // expect(getByText("Product 1")).toBe;
-//     // expect(getByText("12345")).toBeTruthy();
-//     // expect(getByText("New")).toBeTruthy();
-//     // expect(getByText("₴100")).toBeTruthy();
-//     // expect(getByText("$80")).toBeTruthy();
+   
 
-//     // expect(getByText("Product 2")).toBeTruthy();
-//     // expect(getByText("54321")).toBeTruthy();
-//     // expect(getByText("Used")).toBeTruthy();
-//     // expect(getByText("₴75")).toBeTruthy();
-//     // expect(getByText("$60")).toBeTruthy();
+     const title = getByText('Order 1')
+    // expect(productTitle).toBeInTheDocument()
+    // expect(orderDate).toBeInTheDocument()
 
-//     // const deleteButton = getByAltText("Delete Product");
-//     // expect(deleteButton).toBeTruthy();
-//   });
-// });
+   // fireEvent.click(productTitle)
+    screen.debug
+    //expect(useOrderStoreMock.getOrders).toBe
+  })
+})

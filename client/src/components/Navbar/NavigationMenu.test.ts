@@ -10,6 +10,11 @@ const router = createRouter({
   history: createMemoryHistory(),
   routes,
 });
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.restoreAllMocks()
+});
 describe("Navbar", () => {
   test("renders navigation links and highlights the current page", async () => {
 

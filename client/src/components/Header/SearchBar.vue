@@ -1,5 +1,5 @@
 <template>
-  <div class="container-search">
+  <div class="container-search" v-if="isShow()">
     <input
       class="container-search_input"
       v-model="searchValue"
@@ -30,6 +30,9 @@ function searchItem() {
   } else if (router.currentRoute.value.name == "orders") {
     orderStore.setSearchValue(searchValue.value);
   }
+}
+const isShow = () => {
+  return router.currentRoute.value.name !== 'login' && router.currentRoute.value.name !== 'registration'
 }
 </script>
 

@@ -1,7 +1,10 @@
 import OrderedProducts from "./OrderedProducts.vue";
 import OrdersList from "./OrdersList.vue";
 import { render, fireEvent } from "@testing-library/vue";
-
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+});
 describe("Ordered Products", () => {
   test("should render products", async () => {
     render(OrderedProducts);

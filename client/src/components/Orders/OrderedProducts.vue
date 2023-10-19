@@ -97,6 +97,8 @@ function setStatus(status: boolean) {
 }
 function hideProducts() {
   productsStore.hideProducts();
+  
+  
 }
 function closeNewProductWindow() {
   showModal.value = false;

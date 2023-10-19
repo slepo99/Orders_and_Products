@@ -1,7 +1,11 @@
 //import { render, screen } from "@testing-library/vue";
 import { mount } from "@vue/test-utils";
 import DateTimeDisplayVue from "@/components/Header/DateTimeDisplay.vue";
-
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.restoreAllMocks()
+});
 describe("Date Time display", () => {
   test("renders current date and time correctly", async () => {
     const wrapper = mount(DateTimeDisplayVue);

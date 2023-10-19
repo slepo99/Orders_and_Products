@@ -9,7 +9,6 @@
         <div class="products-list_marker">
           <div :class="setStatus(product.status)"></div>
         </div>
-
         <div class="products-list_image">
           <img
             width="100"
@@ -129,6 +128,7 @@ function setProductTitle(title: string) {
   }
   return title;
 }
+
 async function removeProduct(id: string | undefined) {
   await productStore.deleteAnyProduct(id);
 }

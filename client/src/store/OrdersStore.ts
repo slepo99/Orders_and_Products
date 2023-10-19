@@ -38,12 +38,22 @@ export const useOrderStore = defineStore("order", {
     },
 
     async getOrders() {
-      const response = await GetOrders();
-      this.orders = response.data;
+      try {
+        const response = await GetOrders();
+        this.orders = response.data;
+      } catch (error) {
+        console.error("Failed to get order");
+        throw error;
+      }
     },
 
     async deleteOrder(id: string) {
-      await DeleteOrder(id);
+      try {
+        await DeleteOrder(id);
+      } catch (error) {
+        console.error("Failed to delete order");
+        throw error;
+      }
     },
 
     getSelectedOrder(id: string) {

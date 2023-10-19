@@ -4,7 +4,11 @@ import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
-
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.restoreAllMocks()
+});
 describe("Product create", () => {
   test("should render new product window", async () => {
     render(ProductCreate, {

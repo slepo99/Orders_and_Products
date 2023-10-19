@@ -65,7 +65,7 @@ function closeDeleteOrderWindow() {
   showModal.value = false;
 }
 function openProductList(id: string) {
-  isActive.value = !isActive.value;
+  isActive.value = true
   productsStore.showProducts(isActive.value);
   if (isActive.value) {
     order.getSelectedOrder(id);

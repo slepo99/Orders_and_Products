@@ -4,7 +4,11 @@ import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
-
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.restoreAllMocks()
+});
 describe("Order remove ", () => {
   test("should render Orders component", async () => {
     render(OrdersList, {

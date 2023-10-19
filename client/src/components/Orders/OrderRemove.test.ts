@@ -5,7 +5,10 @@ import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
-
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+});
 describe("Order remove ", () => {
   test("should render remove window", async () => {
     render(OrderRemove, {
