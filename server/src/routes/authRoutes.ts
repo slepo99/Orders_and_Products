@@ -1,7 +1,6 @@
 import express from "express";
 import authController from "../controllers/AuthController";
 import { check } from "express-validator";
-import authMiddleware from "../middleware/AuthMiddleware";
 import roleMiddleware from "../middleware/RoleMiddleware";
 
 const authRouter = express.Router();
