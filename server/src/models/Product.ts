@@ -2,7 +2,6 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export interface IProduct extends Document {
   serialNumber: number;
-  // isNew: boolean;
   photo: string;
   title: string;
   type: string;
@@ -21,7 +20,6 @@ export interface IProduct extends Document {
 
 const ProductSchema = new Schema<IProduct>({
   serialNumber: { type: Number },
-  //isNew: { type: Boolean },
   photo: { type: String },
   title: { type: String },
   type: { type: String },
