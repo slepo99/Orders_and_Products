@@ -70,13 +70,13 @@ On the products page we can view the available products in detail, we can also u
  There are also useful options for the user. In the corner you can see the current date, time and the number of active users.
 ### Auth:
 7)
-![login](https://i.ibb.co/yfYwcsh/2023-10-20-09-14-37.png)
+![loginPage](https://i.ibb.co/yfYwcsh/2023-10-20-09-14-37.png)
 
 Authorization and registration are also implemented for users, there is also form validation, so we are not afraid that we will enter something incorrectly :)
 
 
 8)
-![registration](https://i.ibb.co/vdhcyq5/2023-10-20-09-14-56.png)
+![registrationPage](https://i.ibb.co/vdhcyq5/2023-10-20-09-14-56.png)
 
 
 
