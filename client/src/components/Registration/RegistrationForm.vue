@@ -75,7 +75,7 @@ import { registrationData, authData } from "@/types/UserTypes";
 import { reactive } from "vue";
 
 const authStore = useAuthStore();
-const error = reactive({˝
+const error = reactive({
   username: false,
   password: false,
   confirmPassword: false,
