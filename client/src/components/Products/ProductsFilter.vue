@@ -75,4 +75,11 @@ const filterByType = () => {
     }
   }
 }
+@media (max-width: 1280px) {
+ .container_filter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+ }
+}
 </style>

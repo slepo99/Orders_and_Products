@@ -105,4 +105,26 @@ onBeforeUnmount(() => {
     }
   }
 }
+@media (max-width: 1470px) {
+  .date-time {
+    gap: 5px;
+
+    &__date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+@media (max-width: 980px) {
+  .date-time {
+    gap: 5px;
+
+    &__date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
 </style>

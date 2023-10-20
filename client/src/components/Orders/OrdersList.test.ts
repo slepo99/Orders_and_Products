@@ -6,8 +6,7 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.clearAllMocks();
-  vi.resetAllMocks();
-  vi.restoreAllMocks()
+  vi.resetModules()
 });
 describe("Order remove ", () => {
   test("should render Orders component", async () => {

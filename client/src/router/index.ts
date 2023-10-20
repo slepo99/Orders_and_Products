@@ -3,6 +3,7 @@ const Orders = () => import("@/views/Orders.vue");
 const Products = () => import("@/views/Products.vue")
 const Registration = () => import("@/views/Registration.vue");
 const Login = () => import("@/views/Login.vue")
+const Error = () => import("@/views/Error.vue")
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -51,7 +52,15 @@ const routes: Array<RouteRecordRaw> = [
         next({ name: "login" });
       }
     },
-  }
+  },
+  {
+    path: "/404",
+    name: "error",
+    component: Error
+  },
+  {
+    path: '/:catchAll(.*)', redirect:'404'
+}
 ];
 
 const router = createRouter({

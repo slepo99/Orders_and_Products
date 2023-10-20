@@ -21,7 +21,7 @@
       width: 100%;
       justify-content: center;
       align-items: center;
-
+    width: 100%;
       &_btn {
         background: none;
         border: none;

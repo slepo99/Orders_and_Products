@@ -8,9 +8,7 @@
       placeholder="Search"
       id="input"
     />
-    <label for="input">
-      <slot/>
-    </label>
+  
     
   </div>
 </template>
@@ -32,7 +30,7 @@ function searchItem() {
   }
 }
 const isShow = () => {
-  return router.currentRoute.value.name !== 'login' && router.currentRoute.value.name !== 'registration'
+  return router.currentRoute.value.name !== 'login' && router.currentRoute.value.name !== 'registration' && localStorage.getItem("token")
 }
 </script>
 
@@ -54,4 +52,24 @@ const isShow = () => {
             font-weight: 600;
         }
     }
+    @media (max-width: 980px) {
+      .container-search {
+        &_input {
+            width: 200px;
+            height: 20px;
+            margin-left: 20px;
+        }
+      
+    }
+}
+@media (max-width: 720px) {
+      .container-search {
+        &_input {
+            width: 130px;
+            height: 20px;
+            margin-left: 20px;
+        }
+      
+    }
+}
 </style>

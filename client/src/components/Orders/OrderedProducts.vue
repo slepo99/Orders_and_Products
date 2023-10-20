@@ -26,7 +26,6 @@
           data-testid="add-new-product"
         >
           <img
-          
             width="22"
             height="22"
             src="https://img.icons8.com/color/96/add--v1.png"
@@ -97,8 +96,6 @@ function setStatus(status: boolean) {
 }
 function hideProducts() {
   productsStore.hideProducts();
-  
-  
 }
 function closeNewProductWindow() {
   showModal.value = false;
@@ -247,148 +244,64 @@ async function removeProduct(id: string | undefined) {
     margin: 0;
   }
 }
+@media (max-width: 1200px) {
+  .container-products {
+    &__title-box {
+      h3 {
+        padding-left: 25px;
+        font-size: 16px;
+        text-align: start;
+      }
+    }
+  }
+}
+@media (max-width: 980px) {
+  .container-products {
+    transition: width 0.5s ease;
+    position: relative;
+    left: 80px;
+    height: 500px;
+
+    &__title-box {
+      h3 {
+        padding-left: 25px;
+        font-size: 14px;
+        text-align: start;
+      }
+    }
+  }
+}
+@media (max-width: 720px) {
+  .container-products {
+    position: relative;
+    height: 500px;
+    &__title-box {
+      h3 {
+        padding-left: 25px;
+        font-size: 14px;
+        text-align: start;
+      }
+    }
+    &__product-wrapper {
+      .container-products__product {
+        &-status-dot-free {
+          width: 5px;
+          height: 5px;
+        }
+        &-status-dot-busy {
+          width: 5px;
+          height: 5px;
+        }
+        &-title {
+          p {
+            font-size: 12px;
+          }
+        }
+        &-status {
+          display: none;
+        }
+      }
+    }
+  }
+}
 </style>
-
-<!-- <style lang="scss" scoped>
-
-
-.container-products {
-  transition: width 0.5s ease;
-  .close-dialog {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  top: 2px;
-  left: 12px;
-  align-items: center;
-  height: 0;
-  transition: width 0.5s ease;
-  &_btn {
-    background: none;
-    border: 1px solid rgb(199, 199, 199);
-    justify-content: center;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    height: 30px;
-    width: 30px;
-    box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
-  }
-}
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 40vw;
-  border: 1px solid rgb(204, 204, 204);
-  border-radius: 6px;
-  transition: width 0.5s ease;
-  background-color: #fff;
-  height: 600px;
-  
-
-  .title-box {
-    display: flex;
-    height: 50px;
-
-    h3 {
-      padding-left: 25px;
-    }
-  }
-  .add-product {
-    height: 50px;
-    display: flex;
-    cursor: pointer;
-    &_btn {
-      background: none;
-      border: none;
-      padding-left: 25px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      &_text {
-        padding-left: 5px;
-        color: green;
-        font-weight: 600;
-        margin: 0;
-      }
-    }
-  }
-  .product-wrapper {
-   height: 500px;
-   overflow: scroll;
-    .product {
-      height: auto;
-      overflow: scroll;
-      cursor: pointer;
-      grid-template-columns: 0.5fr 0.5fr 2fr 1fr 1fr;
-      display: grid;
-      justify-content: space-around;
-      align-items: center;
-      align-content: center;
-      justify-items: center;
-      &_free {
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background: #57bc57;
-      }
-      &_busy {
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
-        background: #d31f1f;
-      }
-      &_title {
-        width: 100%;
-        p {
-          margin: 0;
-        }
-      }
-      &_status {
-        &_free {
-          font-weight: 500;
-          color: #57bc57;
-        }
-        &_repairing {
-          font-weight: 500;
-          color: #c92828;
-        }
-      }
-      &_title {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        &_name {
-          color: black;
-          font-weight: 600;
-        }
-        &_serial {
-          color: rgb(161, 161, 161);
-        }
-      }
-      &_delete {
-        button {
-          border: none;
-          background: none;
-          cursor: pointer;
-        }
-      }
-    }
-    .product:hover {
-      box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
-    }
-  }
-  hr {
-    width: 100%;
-    height: 1px;
-    background-color: rgb(204, 204, 204);
-    border: 0;
-    margin: 0;
-  }
-}
-
-
-
-</style> -->

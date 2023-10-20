@@ -10,7 +10,7 @@
       />
       <h2>Orders / {{ ordersLength }}</h2>
     </div>
-    <CreateOrder :showModal="showModal" @closeOrderWindow="closeOrderWindow"/>
+    <CreateOrder :showModal="showModal" @closeOrderWindow="closeOrderWindow" />
     <div class="order_wrapper">
       <OrdersList />
       <OrderedProducts v-if="productsStore.isActive" />
@@ -26,18 +26,15 @@ import { useOrderStore } from "@/store/OrdersStore";
 import { useProductsStore } from "@/store/productModule";
 import { ref, computed } from "vue";
 const order = useOrderStore();
-const productsStore = useProductsStore()
-
-
+const productsStore = useProductsStore();
 
 const showModal = ref<boolean>(false);
-
 
 function openNewOrderWindow() {
   showModal.value = true;
 }
 function closeOrderWindow() {
-  showModal.value = false
+  showModal.value = false;
 }
 const ordersLength = computed(() => {
   return order.orders.length;
@@ -52,7 +49,7 @@ const ordersLength = computed(() => {
   min-width: 800px;
   height: calc(100vh - 80px);
   flex-direction: column;
-  margin-left: 40px;
+  margin-left: 50px;
   .create-order {
     padding: 80px 0 0 80px;
     gap: 20px;
@@ -68,6 +65,39 @@ const ordersLength = computed(() => {
   .order_wrapper {
     display: flex;
     gap: 50px;
+  }
+}
+@media (max-width: 1200px) {
+  .container-order {
+    overflow: scroll;
+    .create-order {
+      position: relative;
+    }
+  }
+}
+@media (max-width: 980px) {
+  .container-order {
+    overflow: scroll;
+    .create-order {
+      position: relative;
+      left: 30px;
+      margin: 0;
+    }
+  }
+}
+@media (max-width: 720px) {
+  .container-order {
+    width: 90vw;
+    .create-order {
+      position: relative;
+      left: -80px;
+      margin: 0;
+    }
+    .order_wrapper {
+      position: relative;
+
+      right: 100px;
+    }
   }
 }
 </style>

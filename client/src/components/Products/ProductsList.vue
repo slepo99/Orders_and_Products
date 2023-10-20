@@ -273,4 +273,57 @@ onMounted(() => {
     }
   }
 }
+@media (max-width: 1280px) {
+  .container {
+    height: 600px;
+
+    .container-products {
+      .products-list {
+        width: 600px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+        .products-list_status {
+          display: none;
+        }
+
+        .products-list_guarantee {
+          display: none;
+        }
+
+        &_isnew {
+          display: none;
+        }
+        &_price {
+        }
+        .products-list_type {
+          display: none;
+        }
+        .products-list_order-title {
+          display: none;
+        }
+        &_date {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1280px) {
+  .container {
+    height: 600px;
+    width: 90vw;
+    .container-products {
+      .products-list {
+        width: 90vw;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+       
+      }
+    }
+  }
+}
 </style>

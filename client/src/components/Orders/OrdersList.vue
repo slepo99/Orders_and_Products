@@ -6,7 +6,7 @@
       </div>
 
       <div class="order-list__details-box">
-        <button @click="openProductList(item._id)" >
+        <button @click="openProductList(item._id)">
           <img
             class="order-list__details-box--details"
             data-testid="open-products"
@@ -18,7 +18,9 @@
         </button>
       </div>
       <div class="order-list__quantity-box">
-        <p class="order-list__quantity">{{ item.products?.length }} products</p>
+        <p class="order-list__quantity">
+          {{ item.products?.length }} <span>products</span>
+        </p>
       </div>
       <div class="order-list__date-box">
         <p class="order-list__date-box-date">{{ item.date }}</p>
@@ -38,7 +40,6 @@
       :currentOrderId="currentOrderId"
       :showModal="showModal"
       @closeDeleteOrderWindow="closeDeleteOrderWindow"
-      
     />
   </div>
 </template>
@@ -65,7 +66,7 @@ function closeDeleteOrderWindow() {
   showModal.value = false;
 }
 function openProductList(id: string) {
-  isActive.value = true
+  isActive.value = true;
   productsStore.showProducts(isActive.value);
   if (isActive.value) {
     order.getSelectedOrder(id);
@@ -215,6 +216,349 @@ onMounted(() => {
       height: 80%;
       display: flex;
       align-items: center;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    left: 100px;
+    flex-direction: column;
+    transition: width 0.5s ease;
+    width: 700px;
+    height: 500px;
+    overflow: scroll;
+
+    .order-list {
+      // grid-template-columns: 130px 40px 20px 80px 70px 35px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      padding-left: 10px;
+      &__title-box {
+        overflow: hidden;
+        &--title {
+          font-size: 12px;
+          margin: 0;
+          text-align: start;
+          line-height: 1;
+        }
+      }
+      &__quantity-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+      }
+      &__quantity {
+        font-size: 12px;
+        text-align: center;
+        span {
+          display: none;
+        }
+      }
+      &__date-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+
+        &-date {
+          font-size: 10px;
+          font-weight: 600;
+        }
+      }
+      &__delete-box {
+        width: 100%;
+      }
+      &__details-box {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        &--details {
+          border: 2px solid rgb(193, 193, 193);
+          border-radius: 20px;
+          padding: 5px;
+          height: 10px;
+          width: 10px;
+        }
+      }
+      &__price-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+
+      &__price-usd {
+        margin: 0;
+        font-size: 10px;
+      }
+      &__price-uah {
+        margin: 0;
+        font-size: 10px;
+      }
+
+      p {
+        font-weight: 600;
+      }
+    }
+    .order-list:hover {
+      box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
+      text-align: center;
+      height: 75px;
+    }
+  }
+}
+@media (max-width: 980px) {
+  .container {
+    flex-direction: column;
+    transition: width 0.5s ease;
+    width: 500px;
+    height: 500px;
+    overflow: scroll;
+    position: relative;
+    padding: 0 0 0 10px;
+
+    .order-list {
+      // grid-template-columns: 130px 40px 20px 80px 70px 35px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+
+      &__title-box {
+        overflow: hidden;
+        &--title {
+          font-size: 12px;
+          margin: 0;
+          text-align: start;
+          line-height: 1;
+        }
+      }
+      &__quantity-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+      }
+      &__quantity {
+        font-size: 12px;
+        text-align: center;
+        span {
+          display: none;
+        }
+      }
+      &__date-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+
+        &-date {
+          font-size: 10px;
+          font-weight: 600;
+        }
+      }
+      &__delete-box {
+        width: 100%;
+      }
+      &__details-box {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        &--details {
+          border: 2px solid rgb(193, 193, 193);
+          border-radius: 20px;
+          padding: 5px;
+          height: 10px;
+          width: 10px;
+        }
+      }
+      &__price-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+
+      &__price-usd {
+        margin: 0;
+        font-size: 10px;
+      }
+      &__price-uah {
+        margin: 0;
+        font-size: 10px;
+      }
+
+      p {
+        font-weight: 600;
+      }
+    }
+    .order-list:hover {
+      box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
+      text-align: center;
+      height: 75px;
+    }
+  }
+  .container.container_active {
+    transition: width 0, 5s ease;
+    padding: 0 0 0 5px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 30%;
+
+    .order-list {
+      transition: width 0, 5s ease;
+      grid-template-columns: 1fr 1fr 2fr;
+      display: grid;
+      justify-items: center;
+      border: 1px solid rgb(204, 204, 204);
+      border-radius: 6px;
+      padding-left: 20px;
+      height: 70px;
+      align-items: center;
+      align-content: center;
+      cursor: pointer;
+
+      &__title-box,
+      &__price-box,
+      &__delete-box {
+        display: none;
+      }
+      &__quantity-box,
+      &__date-box {
+        padding: 0 10px 0 10px;
+      }
+      &__date-box {
+        height: 80%;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 0;
+    display: flex;
+    width: 100vw;
+    .order-list {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+      
+      &__title-box {
+        &--title {
+          font-size: 12px;
+          margin: 0;
+          text-align: start;
+          line-height: 1;
+        }
+      }
+      &__quantity-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+      }
+      &__quantity {
+        font-size: 12px;
+        text-align: center;
+        span {
+          display: none;
+        }
+      }
+      &__date-box {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+
+        &-date {
+          font-size: 10px;
+          font-weight: 600;
+        }
+      }
+      &__delete-box {
+        width: 100%;
+      }
+      &__details-box {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        &--details {
+          border: 2px solid rgb(193, 193, 193);
+          border-radius: 20px;
+          padding: 5px;
+          height: 10px;
+          width: 10px;
+        }
+      }
+      &__price-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+
+      &__price-usd {
+        margin: 0;
+        font-size: 10px;
+      }
+      &__price-uah {
+        margin: 0;
+        font-size: 10px;
+      }
+
+      p {
+        font-weight: 600;
+      }
+    }
+  }
+  .container.container_active {
+    transition: width 0, 5s ease;
+    padding: 0 0 0 5px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 30%;
+
+    .order-list {
+      transition: width 0, 5s ease;
+      grid-template-columns: 1fr 1fr 2fr;
+      display: grid;
+      justify-items: center;
+
+      padding-left: 20px;
+      height: 70px;
+      align-items: center;
+      align-content: center;
+
+      &__title-box,
+      &__price-box,
+      &__delete-box {
+        display: none;
+      }
+      &__quantity-box,
+      &__date-box {
+        padding: 0 10px 0 10px;
+      }
+      &__date-box {
+        height: 80%;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }
