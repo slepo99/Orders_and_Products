@@ -7,12 +7,10 @@ export const useAuthStore = defineStore("auth", {
     token: localStorage.getItem("token") || null,
     username: localStorage.getItem("username") || null,
   }),
-  getters: {},
   actions: {
     async createNewUser(regData: authData) {
       try {
         const response = await CreateNewUser(regData);
-        console.log(response);
         router.push('/login')
       } catch (error) {
         console.error(error, "Failed register new user");

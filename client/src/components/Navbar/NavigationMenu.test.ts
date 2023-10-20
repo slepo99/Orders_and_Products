@@ -1,42 +1,54 @@
 import NavigationMenu from "@/components/Navbar/NavigationMenu.vue";
-import { render, fireEvent, screen} from "@testing-library/vue";
-import { createRouter, createMemoryHistory } from "vue-router";
+import { render, fireEvent, screen } from "@testing-library/vue";
+import router from "@/router";
 
-const routes = [
-  { path: "/orders", name: "orders", component: { template: '' }  },
-  { path: "/products", name: "products", component: { template: '' }  },
-];
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes,
+import { setActivePinia, createPinia } from "pinia";
+import { mount } from "@vue/test-utils";
+beforeEach(() => {
+  setActivePinia(createPinia());
 });
+
 afterEach(() => {
   vi.clearAllMocks();
-  vi.resetAllMocks();
-  vi.restoreAllMocks()
 });
 describe("Navbar", () => {
-  test("renders navigation links and highlights the current page", async () => {
-
-   const { getByTestId, container} =  render(NavigationMenu, {
+  test("Is logout logic and modal window work ]", async () => {
+    const wrapper = mount(NavigationMenu, {
       global: {
         plugins: [router],
       },
     });
+    const { getByText, container } = render(NavigationMenu, {
+      global: {
+        plugins: [router],
+        mocks: {
+          authStore: {
+            token: vi.fn(),
+          },
+        },
+      },
+    });
+    const logoutBtn = getByText(/logout/i);
+    await fireEvent.click(logoutBtn);
+    expect(logoutBtn).toBe;
+    const confirmLogout = getByText(/yes/i);
+    await fireEvent.click(confirmLogout);
+    expect(confirmLogout).toBe;
 
-    router.push("/orders");
-
-    const ordersLink = getByTestId("order");
-    ordersLink.classList.add("sidebar__link--active");
-    expect(ordersLink.classList.contains("sidebar__link--active")).toBe(true);
-    fireEvent.click(ordersLink)
-    
-
-    router.push("/products");
-    screen.debug()
-    const productLink = getByTestId("products");
-    productLink.classList.add("sidebar__link--active");
-    expect(productLink.classList.contains("sidebar__link--active")).toBe(true);
-    fireEvent.click(productLink)
+    screen.debug();
+  });
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+  test("shoud not render login page if user logged in", async () => {
+    const { queryByTestId, container } = render(NavigationMenu, {
+      global: {
+        plugins: [router]
+      }
+    })
+    const loginPage = queryByTestId('login')
+    expect(loginPage).toBeNull()
+    const registerPage = queryByTestId('registration')
+    expect(registerPage).toBeNull()
   });
 });

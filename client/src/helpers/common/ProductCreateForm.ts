@@ -1,6 +1,6 @@
 import { reactive } from "vue";
 import { ProductPost } from "@/types/ProductTypes";
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 import { setActivePinia, createPinia } from "pinia";
 setActivePinia(createPinia());
 

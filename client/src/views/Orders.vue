@@ -22,7 +22,7 @@
 import CreateOrder from "@/components/Orders/CreateOrder.vue";
 import OrdersList from "@/components/Orders/OrdersList.vue";
 import OrderedProducts from "@/components/Orders/OrderedProducts.vue";
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
 import { ref, computed } from "vue";
 const order = useOrderStore();
@@ -101,3 +101,4 @@ const ordersLength = computed(() => {
   }
 }
 </style>
+@/store/ordersModule

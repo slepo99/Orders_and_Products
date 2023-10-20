@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { PutProduct } from "@/services/orderRequests";
 import { Order, ProductGet } from "@/types/OrderTypes";
 import { ProductPost } from "@/types/ProductTypes";
-import { useOrderStore } from "./OrdersStore";
+import { useOrderStore } from "./ordersModule";
 
 export const useProductsStore = defineStore("products", {
   state: () => ({

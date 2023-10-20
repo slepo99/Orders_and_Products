@@ -103,6 +103,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import { useAuthStore } from "@/store/authModule";
+
 const authStore = useAuthStore();
 const error = reactive({
   username: false,
@@ -149,6 +150,7 @@ async function login() {
 }
 </script>
 <style scoped lang="scss">
+
 .container-body {
   min-height: 80vh;
   padding: 0;

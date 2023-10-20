@@ -45,12 +45,12 @@
 </template>
 
 <script setup lang="ts">
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
 import { ProductGet } from "@/types/OrderTypes";
 import { onMounted, ref, computed } from "vue";
 import OrderRemove from "./OrderRemove.vue";
-import DeleteIcon from "@/UI/DeleteIcon.vue";
+import DeleteIcon from "@/UI/DeleteBtn.vue";
 
 const productsStore = useProductsStore();
 const order = useOrderStore();
@@ -456,7 +456,7 @@ onMounted(() => {
     .order-list {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
-      
+
       &__title-box {
         &--title {
           font-size: 12px;
@@ -563,3 +563,4 @@ onMounted(() => {
   }
 }
 </style>
+@/store/ordersModule

@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 const order = useOrderStore();
 const props = defineProps({
   currentOrderId: {
@@ -65,3 +65,4 @@ async function removeOrder(id: string) {
   }
 }
 </style>
+@/store/ordersModule

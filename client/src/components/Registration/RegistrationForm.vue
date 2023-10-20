@@ -60,7 +60,9 @@
       <p>
         Already have an accont ?
         <a>
-          <router-link style="color: blue; cursor: pointer" to="/login">Sign in</router-link>
+          <router-link style="color: blue; cursor: pointer" to="/login"
+            >Sign in</router-link
+          >
         </a>
       </p>
     </div>

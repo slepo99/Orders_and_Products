@@ -7,8 +7,18 @@ const axiosInstance = axios.create({
 });
 
 export const CreateNewUser = async (regData: authData) => {
-  return await axiosInstance.post("/registration", regData);
+  try {
+    return await axiosInstance.post("/registration", regData);
+  } catch (e) {
+    console.log("Failed to create account");
+    throw e;
+  }
 };
 export const SignIn = async (loginData: authData) => {
-  return await axiosInstance.post("/login", loginData);
+  try {
+    return await axiosInstance.post("/login", loginData);
+  } catch (e) {
+    console.log("login error", e);
+    throw e;
+  }
 };

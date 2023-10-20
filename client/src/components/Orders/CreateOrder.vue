@@ -2,7 +2,12 @@
   <ModalWindow :showModal="props.showModal">
     <div class="modal-window__close-dialog">
       <button class="close-dialog__btn" @click="closeDialog">
-        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/60/7DAE33/delete-sign.png" alt="delete-sign" />
+        <img
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios-glyphs/60/7DAE33/delete-sign.png"
+          alt="delete-sign"
+        />
       </button>
     </div>
     <div class="modal-window__container-title">
@@ -44,7 +49,7 @@
 import ModalWindow from "@/UI/ModalWindow.vue";
 import { OrderDescription } from "@/types/OrderTypes";
 import { reactive, onMounted, computed } from "vue";
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 
 const props = defineProps({
   showModal: {
@@ -52,7 +57,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits()
+const emit = defineEmits();
 const order = useOrderStore();
 const getDate = computed<string>(() => {
   const date = new Date();
@@ -69,11 +74,11 @@ async function createOrder() {
   await order.createOrder(orderForm);
   orderForm.title = "";
   orderForm.description = "";
-  await order.getOrders()
-  emit('closeOrderWindow')
+  await order.getOrders();
+  emit("closeOrderWindow");
 }
 function closeDialog() {
-  emit('closeOrderWindow')
+  emit("closeOrderWindow");
 }
 onMounted(() => {});
 </script>
@@ -144,3 +149,4 @@ onMounted(() => {});
   }
 }
 </style>
+@/store/ordersModule

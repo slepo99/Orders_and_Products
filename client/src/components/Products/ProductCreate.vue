@@ -18,7 +18,12 @@
         <form>
           <div class="container-new-product-form-title">
             <label for="title"> Product name: </label>
-            <input placeholder="Name" type="text" id="title" v-model="productForm.title" />
+            <input
+              placeholder="Name"
+              type="text"
+              id="title"
+              v-model="productForm.title"
+            />
           </div>
 
           <div class="container-new-product-form-serial">
@@ -33,7 +38,12 @@
 
           <div class="container-new-product-form-photo">
             <label for="Photo"> Photo url:</label>
-            <input placeholder="photo" type="text" id="photo" v-model="productForm.photo" />
+            <input
+              placeholder="photo"
+              type="text"
+              id="photo"
+              v-model="productForm.photo"
+            />
           </div>
 
           <div class="container-new-product-form-type">
@@ -114,9 +124,8 @@
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
 import SelectList from "@/UI/SelectList.vue";
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
-import { onMounted } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import productRules from "@/helpers/validations/ProductValidator";
 import {
@@ -157,9 +166,6 @@ async function createProduct() {
 function closeDialog() {
   emit("closeNewProductWindow");
 }
-onMounted(() => {
-  console.log(v$);
-});
 </script>
 
 <style lang="scss" scoped>
@@ -242,3 +248,4 @@ onMounted(() => {
 }
 </style>
 @/helpers/validations/ProductValidator@/helpers/common/ProductCreateForm
+@/store/ordersModule

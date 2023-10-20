@@ -75,11 +75,11 @@
 </template>
 
 <script setup lang="ts">
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
 import { onMounted } from "vue";
 import { months } from "@/helpers/mocks/DateMocks";
-import DeleteIcon from "@/UI/DeleteIcon.vue";
+import DeleteIcon from "@/UI/DeleteBtn.vue";
 const order = useOrderStore();
 const productStore = useProductsStore();
 function setGuarantee(date: string) {
@@ -320,10 +320,9 @@ onMounted(() => {
 
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-
-       
       }
     }
   }
 }
 </style>
+@/store/ordersModule

@@ -29,6 +29,6 @@ describe("Order remove ", () => {
     fireEvent.click(buttons[0]);
     fireEvent.click(buttons[1]);
     expect(title).toBe;
-    expect(buttons).toBe;
+    expect(buttons).toBe; 
   });
 });

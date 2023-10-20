@@ -7,7 +7,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.clearAllMocks();
   vi.resetAllMocks();
-  vi.restoreAllMocks()
+  vi.restoreAllMocks();
 });
 describe("Create Order", () => {
   test("should render the component", async () => {
@@ -49,7 +49,7 @@ describe("Create Order", () => {
     const submitButton = getByText("Create order");
 
     await fireEvent.click(closeBtnImg);
-    await fireEvent.click(submitButton);
+
     expect(closeBtnImg).toBe;
     expect(submitButton).toBe;
   });

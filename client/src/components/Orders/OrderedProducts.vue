@@ -64,7 +64,10 @@
                 Repairing
               </p>
             </div>
-            <DeleteIcon @click="removeProduct(product._id)" />
+            <DeleteIcon
+              data-testid="product-delete"
+              @click="removeProduct(product._id)"
+            />
           </div>
           <hr v-show="product == item.products[item.products.length - 1]" />
         </div>
@@ -79,11 +82,11 @@
 </template>
 
 <script setup lang="ts">
-import { useOrderStore } from "@/store/OrdersStore";
+import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
 import { ref } from "vue";
 import ProductCreate from "@/components/Products/ProductCreate.vue";
-import DeleteIcon from "@/UI/DeleteIcon.vue";
+import DeleteIcon from "@/UI/DeleteBtn.vue";
 const productsStore = useProductsStore();
 const order = useOrderStore();
 const showModal = ref<boolean>(false);
@@ -305,3 +308,4 @@ async function removeProduct(id: string | undefined) {
   }
 }
 </style>
+@/store/ordersModule
