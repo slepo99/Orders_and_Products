@@ -6,12 +6,11 @@ node_modules
 /client/dist
 /server/node_modules
 /server/dist
-/server/.env
+
 .vscode
 notes
 # local env files
-.env.local
-.env.*.local
+
 
 # Log files
 npm-debug.log*

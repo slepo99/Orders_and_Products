@@ -122,6 +122,9 @@ onMounted(() => {});
         font-size: 16px;
         color: #fff;
       }
+      input::placeholder {
+      color: black;
+    }
       .input:focus {
         border: none;
         outline: none;

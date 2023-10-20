@@ -27,12 +27,12 @@ function searchItem() {
     orderStore.setSearchValue(searchValue.value);
   }
 }
-const token = ref(localStorage.getItem('token'))
+
 const isShow = () => {
   return (
     router.currentRoute.value.name !== "login" &&
     router.currentRoute.value.name !== "registration" &&
-    token.value
+    localStorage.getItem('token')
   );
 };
 </script>
