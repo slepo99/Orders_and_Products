@@ -20,7 +20,7 @@ const productRules = {
       value: { required },
     },
   ],
-  serialNumber: { required }
+  serialNumber: { required },
 };
 
 export default productRules;

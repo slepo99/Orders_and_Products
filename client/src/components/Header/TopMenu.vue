@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header__logo" >
+    <div class="header__logo">
       <img
         width="66"
         height="66"
@@ -10,8 +10,13 @@
       <h2>INVENTORY</h2>
     </div>
     <div class="header__burger" @click="openBurger">
-      <img width="30" height="30" src="https://img.icons8.com/ios-filled/150/menu--v4.png" alt="menu--v4"/>
-      <BurgerMenu :showBurger="showBurger"> 
+      <img
+        width="30"
+        height="30"
+        src="https://img.icons8.com/ios-filled/150/menu--v4.png"
+        alt="menu--v4"
+      />
+      <BurgerMenu :showBurger="showBurger">
         <p><router-link to="">123</router-link></p>
         <p><router-link to="">123</router-link></p>
         <p><router-link to="">123</router-link></p>
@@ -33,9 +38,9 @@ import ActiveSessions from "./ActiveSessions.vue";
 import DateTimeDisplay from "./DateTimeDisplay.vue";
 import SearchBar from "./SearchBar.vue";
 import { ref } from "vue";
-const showBurger = ref(false)
-function openBurger () {
-   showBurger.value = !showBurger.value
+const showBurger = ref(false);
+function openBurger() {
+  showBurger.value = !showBurger.value;
 }
 </script>
 
@@ -76,10 +81,10 @@ function openBurger () {
     }
   }
   &__burger {
-  display: none;
-  p {
-    margin: 5px 0 0 0;
-  }
+    display: none;
+    p {
+      margin: 5px 0 0 0;
+    }
   }
 }
 @media (max-width: 980px) {
@@ -98,19 +103,18 @@ function openBurger () {
       }
     }
     &__info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-right: 0;
-   
-  }
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-right: 0;
+    }
   }
 }
 @media (max-width: 720px) {
   .header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    
+
     &__logo {
       display: none;
       img {
@@ -123,10 +127,10 @@ function openBurger () {
       }
     }
     &__burger {
-      display:block;
+      display: block;
       margin-left: 40px;
       cursor: pointer;
-  }
+    }
   }
 }
 </style>

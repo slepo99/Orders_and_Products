@@ -6,7 +6,7 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.clearAllMocks();
-  vi.resetModules()
+  vi.resetModules();
 });
 describe("Order remove ", () => {
   test("should render Orders component", async () => {
@@ -21,7 +21,7 @@ describe("Order remove ", () => {
   test("should open details", async () => {
     const { findAllByTestId } = render(OrdersList);
     const detailsBtn = await findAllByTestId("open-products");
-     fireEvent.click(detailsBtn[0]);
-    expect(detailsBtn).toBe
+    fireEvent.click(detailsBtn[0]);
+    expect(detailsBtn).toBe;
   });
 });

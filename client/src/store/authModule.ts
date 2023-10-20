@@ -11,7 +11,7 @@ export const useAuthStore = defineStore("auth", {
     async createNewUser(regData: authData) {
       try {
         const response = await CreateNewUser(regData);
-        router.push('/login')
+        router.push("/login");
       } catch (error) {
         console.error(error, "Failed register new user");
         throw error;
@@ -39,13 +39,13 @@ export const useAuthStore = defineStore("auth", {
         await Promise.all([
           localStorage.removeItem("token"),
           localStorage.removeItem("username"),
-          this.token = null,
-          this.username = null,
+          (this.token = null),
+          (this.username = null),
         ]);
-        router.push("/login")
+        router.push("/login");
       } catch (error) {
         console.error("Failed to logout");
-        throw error
+        throw error;
       }
     },
   },

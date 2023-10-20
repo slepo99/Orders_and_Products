@@ -21,4 +21,3 @@ export const days: string[] = [
   "Saturday",
   "Sunday",
 ];
-

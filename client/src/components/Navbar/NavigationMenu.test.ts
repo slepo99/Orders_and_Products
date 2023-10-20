@@ -43,12 +43,12 @@ describe("Navbar", () => {
   test("shoud not render login page if user logged in", async () => {
     const { queryByTestId, container } = render(NavigationMenu, {
       global: {
-        plugins: [router]
-      }
-    })
-    const loginPage = queryByTestId('login')
-    expect(loginPage).toBeNull()
-    const registerPage = queryByTestId('registration')
-    expect(registerPage).toBeNull()
+        plugins: [router],
+      },
+    });
+    const loginPage = queryByTestId("login");
+    expect(loginPage).toBeNull();
+    const registerPage = queryByTestId("registration");
+    expect(registerPage).toBeNull();
   });
 });

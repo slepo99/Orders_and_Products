@@ -12,10 +12,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, } from "vue";
-import { useRouter } from "vue-router";
 import { useProductsStore } from "@/store/productModule";
 import { useOrderStore } from "@/store/ordersModule";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 const orderStore = useOrderStore();
 const productsStore = useProductsStore();
 const router = useRouter();
@@ -32,7 +33,7 @@ const isShow = () => {
   return (
     router.currentRoute.value.name !== "login" &&
     router.currentRoute.value.name !== "registration" &&
-    localStorage.getItem('token')
+    localStorage.getItem("token")
   );
 };
 </script>

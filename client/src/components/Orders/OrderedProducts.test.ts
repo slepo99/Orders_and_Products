@@ -1,11 +1,10 @@
 import OrderedProducts from "./OrderedProducts.vue";
 import OrdersList from "./OrdersList.vue";
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 import { render, fireEvent, screen } from "@testing-library/vue";
 afterEach(() => {
   vi.clearAllMocks();
-  
 });
 describe("Ordered Products", () => {
   test("should render products", async () => {
@@ -26,7 +25,7 @@ describe("Ordered Products", () => {
         showModal: true,
       },
     });
-    
+
     const order = {
       selectedOrder: {
         item: {
@@ -40,24 +39,24 @@ describe("Ordered Products", () => {
           },
         },
       },
-    }
-   
+    };
+
     const { findByText } = render(OrderedProducts, {
       global: {
         mocks: {
-          order
+          order,
         },
       },
     });
-    mock.onGet('/orders').reply(200, order);
+    mock.onGet("/orders").reply(200, order);
     const orderTitle = await screen.findByText("order title");
     expect(orderTitle).toBe;
-    const productTitle = await screen.findByText("product title")
-    expect(productTitle).toBe
-    const serialNumber = await screen.findByText('12345')
-    expect(serialNumber).toBe
-    const status = await screen.findByText('Free')
-    expect(status).toBe
+    const productTitle = await screen.findByText("product title");
+    expect(productTitle).toBe;
+    const serialNumber = await screen.findByText("12345");
+    expect(serialNumber).toBe;
+    const status = await screen.findByText("Free");
+    expect(status).toBe;
     screen.debug();
   });
   test("delete button should remove product", async () => {
@@ -79,16 +78,15 @@ describe("Ordered Products", () => {
           },
         },
       },
-    }
+    };
     const { findAllByTestId } = render(OrderedProducts, {
       global: {
         mocks: {
-          order
+          order,
         },
       },
     });
     const deleteButton = await findAllByTestId("delete-product");
-    //expect(queryByTestId("product")).toBeNull();
-    expect(deleteButton).toBe
+    expect(deleteButton).toBe;
   });
 });

@@ -4,7 +4,7 @@ import DateTimeDisplayVue from "@/components/Header/DateTimeDisplay.vue";
 afterEach(() => {
   vi.clearAllMocks();
   vi.resetAllMocks();
-  vi.restoreAllMocks()
+  vi.restoreAllMocks();
 });
 describe("Date Time display", () => {
   test("renders current date and time correctly", async () => {

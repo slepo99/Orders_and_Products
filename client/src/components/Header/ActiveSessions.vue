@@ -30,17 +30,17 @@ onBeforeUnmount(() => {
   width: 130px;
   .active-sessions {
     font-size: 14px;
-      font-weight: 600;
+    font-weight: 600;
   }
 }
 @media (max-width: 980px) {
   .container {
     display: flex;
     width: 130px;
-  .active-sessions {
-    font-size: 14px;
+    .active-sessions {
+      font-size: 14px;
       font-weight: 600;
+    }
   }
-}
 }
 </style>

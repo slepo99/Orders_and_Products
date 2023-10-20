@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 const Orders = () => import("@/views/Orders.vue");
-const Products = () => import("@/views/Products.vue")
+const Products = () => import("@/views/Products.vue");
 const Registration = () => import("@/views/Registration.vue");
-const Login = () => import("@/views/Login.vue")
-const Error = () => import("@/views/Error.vue")
+const Login = () => import("@/views/Login.vue");
+const Error = () => import("@/views/Error.vue");
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -56,11 +56,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/404",
     name: "error",
-    component: Error
+    component: Error,
   },
   {
-    path: '/:catchAll(.*)', redirect:'404'
-}
+    path: "/:catchAll(.*)",
+    redirect: "404",
+  },
 ];
 
 const router = createRouter({

@@ -1,8 +1,7 @@
-export interface registrationData extends authData{
-   
-    confirmPassword: string 
+export interface registrationData extends authData {
+  confirmPassword: string;
 }
 export interface authData {
-    username: string
-    password: string
+  username: string;
+  password: string;
 }

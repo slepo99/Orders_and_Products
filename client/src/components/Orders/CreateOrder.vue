@@ -48,9 +48,8 @@
 <script setup lang="ts">
 import ModalWindow from "@/UI/ModalWindow.vue";
 import { OrderDescription } from "@/types/OrderTypes";
-import { reactive, onMounted, computed } from "vue";
 import { useOrderStore } from "@/store/ordersModule";
-
+import { reactive, onMounted, computed } from "vue";
 const props = defineProps({
   showModal: {
     type: Boolean,
@@ -123,8 +122,8 @@ onMounted(() => {});
         color: #fff;
       }
       input::placeholder {
-      color: black;
-    }
+        color: black;
+      }
       .input:focus {
         border: none;
         outline: none;

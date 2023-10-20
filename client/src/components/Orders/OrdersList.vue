@@ -1,5 +1,9 @@
 <template>
   <div :class="{ container_active: productsStore.isActive }" class="container">
+    <div v-if="order.isLoading"><Spinner /></div>
+    <div v-else-if="order.searchOrder.length == 0">
+      <h2>Orders list is empty , please add some order</h2>
+    </div>
     <div v-for="(item, id) in order.searchOrder" :key="id" class="order-list">
       <div class="order-list__title-box">
         <p class="order-list__title-box--title">{{ item.title }}</p>
@@ -48,9 +52,10 @@
 import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
 import { ProductGet } from "@/types/OrderTypes";
-import { onMounted, ref, computed } from "vue";
 import OrderRemove from "./OrderRemove.vue";
 import DeleteIcon from "@/UI/DeleteBtn.vue";
+import Spinner from "@/UI/Spinner.vue";
+import { onMounted, ref, computed } from "vue";
 
 const productsStore = useProductsStore();
 const order = useOrderStore();

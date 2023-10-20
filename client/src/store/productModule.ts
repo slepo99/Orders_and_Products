@@ -9,6 +9,7 @@ export const useProductsStore = defineStore("products", {
     isActive: false as boolean,
     selectedType: "" as string | null,
     searchValue: "" as string,
+    isLoading: false as boolean,
   }),
   getters: {
     filteredProductsByType: (state): ProductGet[] => {

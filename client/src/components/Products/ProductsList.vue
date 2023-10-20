@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <div class="container-products">
+      <div v-if="order.isLoading"><Spinner /></div>
+      <div v-else-if="productStore.searchProducts.length == 0">
+        <h2>Orders list is empty , please add some order</h2>
+      </div>
       <div
         v-for="product in productStore.searchProducts"
         :key="product._id"
@@ -77,9 +81,11 @@
 <script setup lang="ts">
 import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
-import { onMounted } from "vue";
 import { months } from "@/helpers/mocks/DateMocks";
 import DeleteIcon from "@/UI/DeleteBtn.vue";
+import Spinner from "@/UI/Spinner.vue";
+import { onMounted } from "vue";
+
 const order = useOrderStore();
 const productStore = useProductsStore();
 function setGuarantee(date: string) {

@@ -80,10 +80,11 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import { computed, ref } from "vue";
 import { useAuthStore } from "@/store/authModule";
 import ModalWindow from "@/UI/ModalWindow.vue";
+import { useRouter } from "vue-router";
+import { computed, ref } from "vue";
+
 const authStore = useAuthStore();
 const router = useRouter();
 const showModal = ref(false);

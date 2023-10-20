@@ -19,8 +19,8 @@
 <script setup lang="ts">
 import SelectList from "@/UI/SelectList.vue";
 import { type } from "@/helpers/mocks/ProductSelectMocks";
-import { ref } from "vue";
 import { useProductsStore } from "@/store/productModule";
+import { ref } from "vue";
 const productStore = useProductsStore();
 const selectedType = ref<string | null>("");
 

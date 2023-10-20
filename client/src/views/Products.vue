@@ -17,16 +17,16 @@ import ProductsList from "@/components/Products/ProductsList.vue";
 }
 @media (max-width: 1200px) {
   .container-products {
-  width: calc(100vh);
-  position: relative;
-  right: 50px;
-}
+    width: calc(100vh);
+    position: relative;
+    right: 50px;
+  }
 }
 
 @media (max-width: 720px) {
   .container-products {
-  width: calc(100vh);
-  margin: 0;
-}
+    width: calc(100vh);
+    margin: 0;
+  }
 }
 </style>

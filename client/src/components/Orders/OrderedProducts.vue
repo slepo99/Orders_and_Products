@@ -13,6 +13,10 @@
         />
       </button>
     </div>
+    <div v-if="order.isLoading"><Spinner /></div>
+    <div v-else-if="order.selectedOrder.length == 0">
+      <h2>Products list is empty , please add some order</h2>
+    </div>
     <div v-for="(item, id) in order.selectedOrder" :key="id">
       <div class="container-products__title-box">
         <h3>{{ item.title }}</h3>
@@ -84,9 +88,11 @@
 <script setup lang="ts">
 import { useOrderStore } from "@/store/ordersModule";
 import { useProductsStore } from "@/store/productModule";
-import { ref } from "vue";
 import ProductCreate from "@/components/Products/ProductCreate.vue";
 import DeleteIcon from "@/UI/DeleteBtn.vue";
+import Spinner from "@/UI/Spinner.vue";
+import { ref } from "vue";
+
 const productsStore = useProductsStore();
 const order = useOrderStore();
 const showModal = ref<boolean>(false);

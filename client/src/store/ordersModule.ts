@@ -9,6 +9,7 @@ export const useOrderStore = defineStore("order", {
     orderId: "" as string,
     showModal: false as boolean,
     searchValue: "" as string,
+    isLoading: false as boolean,
   }),
   getters: {
     selectedOrder: (state): Order[] => {
@@ -39,8 +40,10 @@ export const useOrderStore = defineStore("order", {
 
     async getOrders() {
       try {
+        this.isLoading = true;
         const response = await GetOrders();
         this.orders = response.data;
+        this.isLoading = false;
       } catch (error) {
         console.error("Failed to get order");
         throw error;
@@ -64,4 +67,3 @@ export const useOrderStore = defineStore("order", {
     },
   },
 });
-

@@ -70,11 +70,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
 import { useAuthStore } from "@/store/authModule";
 import { registrationData, authData } from "@/types/UserTypes";
+import { reactive } from "vue";
+
 const authStore = useAuthStore();
-const error = reactive({
+const error = reactive({˝
   username: false,
   password: false,
   confirmPassword: false,
