@@ -4,11 +4,11 @@ import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
-afterEach(() => {
-  vi.clearAllMocks();
-  vi.resetModules();
-});
+
 describe("Order remove ", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
   test("should render Orders component", async () => {
     render(OrdersList, {
       props: {
@@ -22,6 +22,6 @@ describe("Order remove ", () => {
     const { findAllByTestId } = render(OrdersList);
     const detailsBtn = await findAllByTestId("open-products");
     fireEvent.click(detailsBtn[0]);
-    expect(detailsBtn).toBe;
+    expect(detailsBtn).toBe; 
   });
 });

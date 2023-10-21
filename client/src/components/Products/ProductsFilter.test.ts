@@ -6,8 +6,6 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.clearAllMocks();
-  vi.resetAllMocks();
-  vi.restoreAllMocks();
 });
 describe("Product filter", () => {
   test("should render new product window", async () => {

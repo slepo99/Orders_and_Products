@@ -9,6 +9,7 @@
         v-for="product in productStore.searchProducts"
         :key="product._id"
         class="products-list"
+        data-testid="products"
       >
         <div class="products-list_marker">
           <div :class="setStatus(product.status)"></div>

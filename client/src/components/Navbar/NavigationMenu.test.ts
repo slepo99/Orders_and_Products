@@ -1,24 +1,24 @@
 import NavigationMenu from "@/components/Navbar/NavigationMenu.vue";
 import { render, fireEvent, screen } from "@testing-library/vue";
 import router from "@/router";
-
-import { setActivePinia, createPinia } from "pinia";
 import { mount } from "@vue/test-utils";
+import { setActivePinia, createPinia } from "pinia";
+
 beforeEach(() => {
   setActivePinia(createPinia());
 });
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
 describe("Navbar", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
   test("Is logout logic and modal window work ]", async () => {
-    const wrapper = mount(NavigationMenu, {
+    mount(NavigationMenu, {
       global: {
         plugins: [router],
       },
     });
-    const { getByText, container } = render(NavigationMenu, {
+    const { getByText } = render(NavigationMenu, {
       global: {
         plugins: [router],
         mocks: {
@@ -37,11 +37,8 @@ describe("Navbar", () => {
 
     screen.debug();
   });
-  afterEach(() => {
-    vi.clearAllMocks();
-  });
-  test("shoud not render login page if user logged in", async () => {
-    const { queryByTestId, container } = render(NavigationMenu, {
+  test("shoud not render login button if user logged in", async () => {
+    const { queryByTestId } = render(NavigationMenu, {
       global: {
         plugins: [router],
       },
@@ -50,5 +47,38 @@ describe("Navbar", () => {
     expect(loginPage).toBeNull();
     const registerPage = queryByTestId("registration");
     expect(registerPage).toBeNull();
+  });
+  test("shoud render login button if user logged out", async () => {
+    const authStore = {
+      token: null,
+    };
+    const hideLogin = true;
+    const hideReg = true;
+    const { queryByText } = render(NavigationMenu, {
+      global: {
+        plugins: [router],
+        mocks: {
+          hideReg,
+          authStore,
+          hideLogin,
+        },
+      },
+      props: {
+        hideReg,
+        authStore,
+        hideLogin,
+      },
+    });
+    if (hideLogin) {
+      expect(queryByText("LOGIN")).toBeNull();
+    } else {
+      expect(queryByText("LOGIN")).not.toBeNull();
+    }
+
+    if (hideReg) {
+      expect(queryByText("REGISTRATION")).toBeNull();
+    } else {
+      expect(queryByText("REGISTRATION")).not.toBeNull();
+    }
   });
 });

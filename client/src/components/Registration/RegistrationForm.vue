@@ -19,7 +19,7 @@
           class="container-body__input username"
           type="text"
           v-model="regData.username"
-          placeholder="USERNAME"
+          placeholder="username"
         />
       </div>
       <div class="container-body__field">

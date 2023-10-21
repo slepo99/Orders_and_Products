@@ -29,7 +29,7 @@ function searchItem() {
   }
 }
 
-const isShow = () => {
+function isShow () {
   return (
     router.currentRoute.value.name !== "login" &&
     router.currentRoute.value.name !== "registration" &&

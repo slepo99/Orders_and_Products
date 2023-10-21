@@ -7,17 +7,17 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.clearAllMocks();
-  vi.resetAllMocks();
 });
 describe("Order remove ", () => {
   test("should render remove window", async () => {
     render(OrderRemove, {
       props: {
         showModal: false,
+        currentOrderId: "123456"
       },
     });
     expect(OrderRemove).toBe;
-  });
+  }); 
 
   test("should show current title and btns", async () => {
     const { findAllByTestId, getAllByRole, findByText } = render(OrdersList);
@@ -28,7 +28,7 @@ describe("Order remove ", () => {
 
     fireEvent.click(buttons[0]);
     fireEvent.click(buttons[1]);
-    expect(title).toBe;
+    expect(title).toBe; 
     expect(buttons).toBe;
   });
 });

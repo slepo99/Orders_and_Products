@@ -3,10 +3,11 @@ import OrdersList from "./OrdersList.vue";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { render, fireEvent, screen } from "@testing-library/vue";
-afterEach(() => {
-  vi.clearAllMocks();
-});
+
 describe("Ordered Products", () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
   test("should render products", async () => {
     render(OrderedProducts);
     expect(OrderedProducts).not.toBe(null);
@@ -19,7 +20,6 @@ describe("Ordered Products", () => {
   });
 
   test("should open selected orders propucts and render products", async () => {
-    const mock = new MockAdapter(axios);
     render(OrdersList, {
       props: {
         showModal: true,
@@ -41,14 +41,14 @@ describe("Ordered Products", () => {
       },
     };
 
-    const { findByText } = render(OrderedProducts, {
+    render(OrderedProducts, {
       global: {
         mocks: {
           order,
         },
       },
     });
-    mock.onGet("/orders").reply(200, order);
+
     const orderTitle = await screen.findByText("order title");
     expect(orderTitle).toBe;
     const productTitle = await screen.findByText("product title");
@@ -57,36 +57,40 @@ describe("Ordered Products", () => {
     expect(serialNumber).toBe;
     const status = await screen.findByText("Free");
     expect(status).toBe;
-    screen.debug();
   });
   test("delete button should remove product", async () => {
-    render(OrdersList, {
-      props: {
-        showModal: true,
-      },
-    });
     const order = {
       selectedOrder: {
         item: {
-          title: "order title",
-          products: {
-            product: {
-              title: "product title",
-              serialNumber: "12345",
-              status: true,
+          title: "order titledsccsdsc",
+          products: [
+            {
+              product: {
+                title: "product title",
+                serialNumber: "12345",
+                status: true,
+              },
             },
-          },
+          ],
         },
       },
     };
+    const useProductsStore = vi.fn();
     const { findAllByTestId } = render(OrderedProducts, {
       global: {
         mocks: {
           order,
+          useProductsStore,
+          isActive: true,
         },
       },
     });
-    const deleteButton = await findAllByTestId("delete-product");
+
+    screen.debug();
+    const deleteButton = await findAllByTestId("product-delete");
     expect(deleteButton).toBe;
+    await fireEvent.click(deleteButton[0]);
+    const title = screen.queryAllByText("product title");
+    expect(title).toBeNull;
   });
 });

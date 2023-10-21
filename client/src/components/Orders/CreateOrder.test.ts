@@ -4,12 +4,11 @@ import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
 });
-afterEach(() => {
-  vi.clearAllMocks();
-  vi.resetAllMocks();
-  vi.restoreAllMocks();
-});
+
 describe("Create Order", () => {
+  afterEach(() => {
+  vi.clearAllMocks();
+});
   test("should render the component", async () => {
     const { getByText, container, getByTestId } = render(CreateOrderVue, {
       props: {
@@ -30,7 +29,7 @@ describe("Create Order", () => {
     const { getByPlaceholderText, getByAltText, getByText } = render(
       CreateOrderVue,
       {
-        props: {
+        props: { 
           showModal: true,
         },
       }
