@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "prettier": "prettier . --write"
   },
   "dependencies": {
     "vue": "^3.3.4",
