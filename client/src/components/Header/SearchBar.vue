@@ -29,13 +29,13 @@ function searchItem() {
   }
 }
 
-function isShow () {
+function isShow() {
   return (
     router.currentRoute.value.name !== "login" &&
     router.currentRoute.value.name !== "registration" &&
     localStorage.getItem("token")
   );
-};
+}
 </script>
 
 <style lang="scss" scoped>

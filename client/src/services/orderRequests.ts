@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 });
 
 export const CreateOrder = async (
-  orderData: OrderDescription
+  orderData: OrderDescription,
 ): Promise<AxiosResponse<OrderDescription>> => {
   return await axiosInstance.post("/orders", orderData);
 };

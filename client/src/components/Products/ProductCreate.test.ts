@@ -14,7 +14,7 @@ describe("Product create", () => {
     render(ProductCreate, {
       props: {
         showModal: false,
-      }, 
+      },
     });
     expect(ProductCreate).toBe;
   });
@@ -28,7 +28,7 @@ describe("Product create", () => {
 
     const closeBtn = await findByAltText("delete-sign");
     fireEvent.click(closeBtn);
-    expect(closeBtn); 
+    expect(closeBtn);
   });
   test("is inputs work correct", async () => {
     const { findByPlaceholderText, getByText } = render(ProductCreate, {

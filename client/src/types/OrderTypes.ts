@@ -13,7 +13,7 @@ export interface ProductGet {
   };
   price: [
     { value: string; symbol: string; isDefault: boolean },
-    { value: string; symbol: string; isDefault: boolean }
+    { value: string; symbol: string; isDefault: boolean },
   ];
   order: number;
   date: string;

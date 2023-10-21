@@ -4,47 +4,53 @@
     <div v-else-if="order.searchOrder.length == 0">
       <h2>Orders list is empty , please add some order</h2>
     </div>
-    <div v-for="(item, id) in order.searchOrder" :key="id" class="order-list">
-      <div class="order-list__title-box">
-        <p class="order-list__title-box--title">{{ item.title }}</p>
-      </div>
+    <div v-else class="order-list-wrapper">
+      <div v-for="(item, id) in order.searchOrder" :key="id" class="order-list">
+        <div class="order-list__title-box">
+          <p class="order-list__title-box--title">{{ item.title }}</p>
+        </div>
 
-      <div class="order-list__details-box">
-        <button @click="openProductList(item._id)">
-          <img
-            class="order-list__details-box--details"
-            data-testid="open-products"
-            width="24"
-            height="24"
-            src="https://img.icons8.com/material/96/808080/list--v1.png"
-            alt="details"
-          />
-        </button>
-      </div>
-      <div class="order-list__quantity-box">
-        <p class="order-list__quantity">
-          {{ item.products?.length }} <span>products</span>
-        </p>
-      </div>
-      <div class="order-list__date-box">
-        <p class="order-list__date-box-date">{{ item.date }}</p>
-      </div>
+        <div class="order-list__details-box">
+          <button @click="openProductList(item._id)">
+            <img
+              class="order-list__details-box--details"
+              data-testid="open-products"
+              width="24"
+              height="24"
+              src="https://img.icons8.com/material/96/808080/list--v1.png"
+              alt="details"
+            />
+          </button>
+        </div>
+        <div class="order-list__quantity-box">
+          <p class="order-list__quantity">
+            {{ item.products?.length }} <span>products</span>
+          </p>
+        </div>
+        <div class="order-list__date-box">
+          <p class="order-list__date-box-date">{{ item.date }}</p>
+        </div>
 
-      <div class="order-list__price-box">
-        <p class="order-list__price-usd">${{ totalUSDPrice(item.products) }}</p>
-        <p class="order-list__price-uah">₴{{ totalUahPrice(item.products) }}</p>
+        <div class="order-list__price-box">
+          <p class="order-list__price-usd">
+            ${{ totalUSDPrice(item.products) }}
+          </p>
+          <p class="order-list__price-uah">
+            ₴{{ totalUahPrice(item.products) }}
+          </p>
+        </div>
+        <DeleteIcon
+          data-testid="order-remove"
+          class="order-list__delete-box"
+          @click="openDeleteOrderWindow(item._id)"
+        />
       </div>
-      <DeleteIcon
-        data-testid="order-remove"
-        class="order-list__delete-box"
-        @click="openDeleteOrderWindow(item._id)"
+      <OrderRemove
+        :currentOrderId="currentOrderId"
+        :showModal="showModal"
+        @closeDeleteOrderWindow="closeDeleteOrderWindow"
       />
     </div>
-    <OrderRemove
-      :currentOrderId="currentOrderId"
-      :showModal="showModal"
-      @closeDeleteOrderWindow="closeDeleteOrderWindow"
-    />
   </div>
 </template>
 
@@ -80,7 +86,7 @@ function openProductList(id: string) {
 
 const getTotalPriceInCurrency = (
   products: ProductGet[],
-  currencySymbol: string
+  currencySymbol: string,
 ): any => {
   return products.reduce((totalPrice, product) => {
     const currency = product.price.reduce((sum, priceItem) => {
@@ -99,10 +105,10 @@ function setPrice(product: ProductGet[], currencySymbol: string) {
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 const totalUSDPrice = computed(
-  () => (product: ProductGet[]) => setPrice(product, "USD")
+  () => (product: ProductGet[]) => setPrice(product, "USD"),
 );
 const totalUahPrice = computed(
-  () => (product: ProductGet[]) => setPrice(product, "UAH")
+  () => (product: ProductGet[]) => setPrice(product, "UAH"),
 );
 
 onMounted(() => {
@@ -113,90 +119,96 @@ onMounted(() => {
 <style lang="scss" scoped>
 .container {
   padding-left: 80px;
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
   transition: width 0.5s ease;
   width: 100%;
   height: 600px;
   overflow: scroll;
-  .order-list {
-    grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
-    display: grid;
-    justify-items: start;
-    border: 1px solid rgb(204, 204, 204);
-    border-radius: 6px;
-    padding-left: 20px;
-    height: 70px;
-    align-items: center;
-    align-content: center;
-    cursor: pointer;
-    background-color: #fff;
-    &__title-box {
-      &--title {
+  .order-list-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    .order-list {
+      grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
+      display: grid;
+      justify-items: start;
+      border: 1px solid rgb(204, 204, 204);
+      border-radius: 6px;
+      padding-left: 20px;
+      height: 70px;
+      align-items: center;
+      align-content: center;
+      cursor: pointer;
+      background-color: #fff;
+      &__title-box {
+        &--title {
+          font-size: 19px;
+        }
+      }
+
+      &__quantity {
         font-size: 19px;
       }
-    }
+      &__date-box {
+        &-date {
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
 
-    &__quantity {
-      font-size: 19px;
-    }
-    &__date-box {
-      &-date {
-        font-size: 14px;
+      &__details-box {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+        &--details {
+          border: 2px solid rgb(193, 193, 193);
+          border-radius: 20px;
+          padding: 5px;
+        }
+      }
+      &__price-box {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+      }
+      &__price-usd {
+        margin: 0;
+      }
+      &__price-uah {
+        margin: 0;
+      }
+
+      p {
         font-weight: 600;
       }
     }
-
-    &__details-box {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-
-      button {
-        background: none;
-        border: none;
-        cursor: pointer;
-      }
-      &--details {
-        border: 2px solid rgb(193, 193, 193);
-        border-radius: 20px;
-        padding: 5px;
-      }
+    .order-list:hover {
+      box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
+      text-align: center;
+      height: 75px;
     }
-    &__price-box {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      align-items: center;
-    }
-    &__price-usd {
-      margin: 0;
-    }
-    &__price-uah {
-      margin: 0;
-    }
-
-    p {
-      font-weight: 600;
-    }
-  }
-  .order-list:hover {
-    box-shadow: 0 3px 10px rgba(59, 59, 59, 0.4);
-    text-align: center;
-    height: 75px;
   }
 }
 
 .container.container_active {
-  transition: width 0, 5s ease;
+  transition:
+    width 0,
+    5s ease;
   padding-left: 80px;
   display: flex;
   gap: 10px;
   flex-direction: column;
   width: 30%;
   .order-list {
-    transition: width 0, 5s ease;
+    transition:
+      width 0,
+      5s ease;
     grid-template-columns: 1fr 1fr 1fr;
     display: grid;
     justify-items: center;
@@ -416,7 +428,9 @@ onMounted(() => {
     }
   }
   .container.container_active {
-    transition: width 0, 5s ease;
+    transition:
+      width 0,
+      5s ease;
     padding: 0 0 0 5px;
     display: flex;
     gap: 10px;
@@ -424,7 +438,9 @@ onMounted(() => {
     width: 30%;
 
     .order-list {
-      transition: width 0, 5s ease;
+      transition:
+        width 0,
+        5s ease;
       grid-template-columns: 1fr 1fr 2fr;
       display: grid;
       justify-items: center;
@@ -532,7 +548,9 @@ onMounted(() => {
     }
   }
   .container.container_active {
-    transition: width 0, 5s ease;
+    transition:
+      width 0,
+      5s ease;
     padding: 0 0 0 5px;
     display: flex;
     gap: 10px;
@@ -540,7 +558,9 @@ onMounted(() => {
     width: 30%;
 
     .order-list {
-      transition: width 0, 5s ease;
+      transition:
+        width 0,
+        5s ease;
       grid-template-columns: 1fr 1fr 2fr;
       display: grid;
       justify-items: center;

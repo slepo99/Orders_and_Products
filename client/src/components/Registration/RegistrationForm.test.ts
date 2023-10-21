@@ -1,5 +1,5 @@
 import RegistrationForm from "./RegistrationForm.vue";
-import { render, fireEvent, screen, getByText } from "@testing-library/vue";
+import { render, fireEvent } from "@testing-library/vue";
 import { setActivePinia, createPinia } from "pinia";
 beforeEach(() => {
   setActivePinia(createPinia());
@@ -20,7 +20,7 @@ describe("Product filter", () => {
       render(RegistrationForm);
     const password = getByPlaceholderText("password") as HTMLInputElement;
     const confirmPass = getByPlaceholderText(
-      "confirm password"
+      "confirm password",
     ) as HTMLInputElement;
     const regBtn = getByText("Sign up");
     fireEvent.update(password, "123");
@@ -31,8 +31,7 @@ describe("Product filter", () => {
     }
   });
   test("register if username and password correct", async () => {
-    const { getByPlaceholderText,  getByText } =
-      render(RegistrationForm);
+    const { getByPlaceholderText, getByText } = render(RegistrationForm);
     const username = getByPlaceholderText("username") as HTMLInputElement;
     const regBtn = getByText("Sign up");
     fireEvent.update(username, "somename");

@@ -37,12 +37,12 @@ export const useProductsStore = defineStore("products", {
   actions: {
     async deleteProduct(id: string | undefined, order: Order[]) {
       const orderIndex = order.findIndex((order) =>
-        order.products.some((product) => product._id === id)
+        order.products.some((product) => product._id === id),
       );
 
       if (orderIndex !== -1) {
         order[orderIndex].products = order[orderIndex].products.filter(
-          (product) => product._id !== id
+          (product) => product._id !== id,
         );
 
         const updatedOrder = order[orderIndex];

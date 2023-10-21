@@ -9,6 +9,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { io, Socket } from "socket.io-client";
+
 const socket: Socket = io("http://localhost:3000");
 
 const activeSessionsCount = ref(0);

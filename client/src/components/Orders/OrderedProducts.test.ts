@@ -1,6 +1,5 @@
 import OrderedProducts from "./OrderedProducts.vue";
 import OrdersList from "./OrdersList.vue";
-import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { render, fireEvent, screen } from "@testing-library/vue";
 
@@ -20,12 +19,7 @@ describe("Ordered Products", () => {
   });
 
   test("should open selected orders propucts and render products", async () => {
-    render(OrdersList, {
-      props: {
-        showModal: true,
-      },
-    });
-
+    const useProductsStore = vi.fn();
     const order = {
       selectedOrder: {
         item: {
@@ -45,6 +39,7 @@ describe("Ordered Products", () => {
       global: {
         mocks: {
           order,
+          isActive: true,
         },
       },
     });
@@ -58,6 +53,7 @@ describe("Ordered Products", () => {
     const status = await screen.findByText("Free");
     expect(status).toBe;
   });
+
   test("delete button should remove product", async () => {
     const order = {
       selectedOrder: {
@@ -75,12 +71,11 @@ describe("Ordered Products", () => {
         },
       },
     };
-    const useProductsStore = vi.fn();
+
     const { findAllByTestId } = render(OrderedProducts, {
       global: {
         mocks: {
           order,
-          useProductsStore,
           isActive: true,
         },
       },

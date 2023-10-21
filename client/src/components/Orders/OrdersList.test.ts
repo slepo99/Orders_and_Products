@@ -22,6 +22,6 @@ describe("Order remove ", () => {
     const { findAllByTestId } = render(OrdersList);
     const detailsBtn = await findAllByTestId("open-products");
     fireEvent.click(detailsBtn[0]);
-    expect(detailsBtn).toBe; 
+    expect(detailsBtn).toBe;
   });
 });

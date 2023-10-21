@@ -90,7 +90,7 @@ const router = useRouter();
 const showModal = ref(false);
 const isOrderPage = computed(() => router.currentRoute.value.name === "orders");
 const isProductPage = computed(
-  () => router.currentRoute.value.name === "products"
+  () => router.currentRoute.value.name === "products",
 );
 const isCurrentPage = computed(() => {
   if (router.currentRoute.value.name === "login") {

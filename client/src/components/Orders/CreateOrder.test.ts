@@ -7,8 +7,8 @@ beforeEach(() => {
 
 describe("Create Order", () => {
   afterEach(() => {
-  vi.clearAllMocks();
-});
+    vi.clearAllMocks();
+  });
   test("should render the component", async () => {
     const { getByText, container, getByTestId } = render(CreateOrderVue, {
       props: {
@@ -29,17 +29,17 @@ describe("Create Order", () => {
     const { getByPlaceholderText, getByAltText, getByText } = render(
       CreateOrderVue,
       {
-        props: { 
+        props: {
           showModal: true,
         },
-      }
+      },
     );
     const inputElementTitle = getByPlaceholderText("Title") as HTMLInputElement;
     await fireEvent.update(inputElementTitle, "test");
     expect(inputElementTitle.value).toBe("test");
 
     const inputElementDescription = getByPlaceholderText(
-      "Description"
+      "Description",
     ) as HTMLInputElement;
     await fireEvent.update(inputElementDescription, "test");
     expect(inputElementDescription.value).toBe("test");

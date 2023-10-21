@@ -1,13 +1,11 @@
 <template>
-    <div>
-      <RegistrationForm/>
-    </div>
+  <div>
+    <RegistrationForm />
+  </div>
 </template>
 
 <script setup lang="ts">
-import RegistrationForm from "@/components/Registration/RegistrationForm.vue"
+import RegistrationForm from "@/components/Registration/RegistrationForm.vue";
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
