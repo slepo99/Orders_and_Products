@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { authData } from "@/types/UserTypes";
 const baseURL = "http://localhost:3000/auth";
 

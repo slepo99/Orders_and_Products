@@ -1,7 +1,6 @@
 import LoginForm from "./LoginForm.vue";
-import { render, fireEvent, screen, getByText } from "@testing-library/vue";
+import { render, fireEvent} from "@testing-library/vue";
 import { setActivePinia, createPinia } from "pinia";
-import axios from "axios";
 import router from "@/router";
 beforeEach(() => {
   setActivePinia(createPinia());
@@ -18,7 +17,7 @@ describe("Product filter", () => {
   });
 
   test.only("sign in if user data correct", async () => {
-    const { getByPlaceholderText, queryByText, getByText } = render(LoginForm, {
+    const { getByPlaceholderText,  getByText } = render(LoginForm, {
       global: {
         plugins: [router],
       },
@@ -33,7 +32,7 @@ describe("Product filter", () => {
     fireEvent.update(username, "somename");
     fireEvent.click(regBtn);
     if (username.value.length && password.value.length >= 4) {
-      // expect(queryByText("Sign in")).toBeNull;
+
     }
   });
 });

@@ -1,6 +1,4 @@
 import OrderedProducts from "./OrderedProducts.vue";
-import OrdersList from "./OrdersList.vue";
-import MockAdapter from "axios-mock-adapter";
 import { render, fireEvent, screen } from "@testing-library/vue";
 
 describe("Ordered Products", () => {
@@ -19,7 +17,7 @@ describe("Ordered Products", () => {
   });
 
   test("should open selected orders propucts and render products", async () => {
-    const useProductsStore = vi.fn();
+ 
     const order = {
       selectedOrder: {
         item: {
