@@ -79,7 +79,6 @@ const loginData = reactive({
 });
 async function validate() {
   if (loginData.username.length < 4) {
-    console.log("short login");
     error.username = true;
     setTimeout(() => {
       error.username = false;
@@ -87,7 +86,6 @@ async function validate() {
     return;
   }
   if (loginData.password.length < 4) {
-    console.log("short password");
     error.password = true;
     setTimeout(() => {
       error.password = false;

@@ -39,9 +39,9 @@ import DateTimeDisplay from "./DateTimeDisplay.vue";
 import SearchBar from "./SearchBar.vue";
 import { ref } from "vue";
 const showBurger = ref(false);
-function openBurger() {
+const openBurger = () => {
   showBurger.value = !showBurger.value;
-}
+};
 </script>
 
 <style lang="scss" scoped>

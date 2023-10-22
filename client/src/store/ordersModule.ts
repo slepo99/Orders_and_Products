@@ -31,7 +31,6 @@ export const useOrderStore = defineStore("order", {
     async createOrder(orderData: OrderDescription) {
       try {
         const response = await CreateOrder(orderData);
-        console.log(response);
       } catch (error) {
         console.error(error, "Failed to create order");
         throw error;

@@ -27,9 +27,9 @@ const props = defineProps({
   },
 });
 const emit = defineEmits();
-function closeDeleteOrderWindow() {
+const closeDeleteOrderWindow = () => {
   emit("closeDeleteOrderWindow");
-}
+};
 async function removeOrder(id: string) {
   emit("closeDeleteOrderWindow");
   await order.deleteOrder(id);

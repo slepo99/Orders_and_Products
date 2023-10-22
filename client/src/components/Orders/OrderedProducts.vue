@@ -92,22 +92,22 @@ import { ref } from "vue";
 const productsStore = useProductsStore();
 const order = useOrderStore();
 const showModal = ref<boolean>(false);
-function setStatus(status: boolean) {
+const setStatus = (status: boolean) => {
   if (status == true) {
     return "container-products__product-status-dot-free";
   } else if (status == false) {
     return "container-products__product-status-dot-busy";
   }
-}
-function hideProducts() {
+};
+const hideProducts = () => {
   productsStore.hideProducts();
-}
-function closeNewProductWindow() {
+};
+const closeNewProductWindow = () => {
   showModal.value = false;
-}
-function openNewProductWindow() {
+};
+const openNewProductWindow = () => {
   showModal.value = true;
-}
+};
 async function removeProduct(id: string | undefined) {
   await productsStore.deleteSelectedOrdersProduct(id);
 }

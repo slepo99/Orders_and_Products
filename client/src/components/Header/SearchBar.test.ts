@@ -1,6 +1,6 @@
 import SearchBar from "@/components/Header/SearchBar.vue";
 
-import { render,  fireEvent } from "@testing-library/vue";
+import { render, fireEvent } from "@testing-library/vue";
 import router from "@/router";
 import { setActivePinia, createPinia } from "pinia";
 

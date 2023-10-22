@@ -163,9 +163,9 @@ async function createProduct() {
     throw error;
   }
 }
-function closeDialog() {
+const closeDialog = () => {
   emit("closeNewProductWindow");
-}
+};
 </script>
 
 <style lang="scss" scoped>

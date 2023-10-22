@@ -14,7 +14,7 @@
       <h1>Order creation</h1>
     </div>
     <div class="modal-window__container-form">
-      <form @submit.prevent="createOrder" class="form" data-testid="form">
+      <form @submit.prevent="validateFields" class="form" data-testid="form">
         <div class="form__title">
           <span>Enter order title:</span>
           <label for="title">
@@ -25,6 +25,11 @@
               v-model="orderForm.title"
               placeholder="Title"
             />
+            <span
+              class="modal-window__container-form-error"
+              :class="{ error_visible: errors.title }"
+              >Title length should be more than 6 and less than 30 symbols</span
+            >
           </label>
         </div>
         <div class="form__description">
@@ -37,6 +42,12 @@
               id="description"
               v-model="orderForm.description"
             />
+            <span
+              class="modal-window__container-form-error"
+              :class="{ error_visible: errors.description }"
+              >Description length should be more than 6 and less than 30
+              symbols</span
+            >
           </label>
         </div>
         <button type="submit" class="form__submit-btn">Create order</button>
@@ -64,21 +75,43 @@ const getDate = computed<string>(() => {
     date.getMonth() + 1
   ).toString()} / ${date.getFullYear().toString()}`;
 });
+const errors = reactive({
+  title: false,
+  description: false,
+});
 const orderForm = reactive<OrderDescription>({
   title: "",
   date: getDate.value,
   description: "",
 });
+async function validateFields() {
+  if (orderForm.title.length < 6 || orderForm.title.length > 30) {
+    errors.title = true;
+    setTimeout(() => {
+      errors.title = false;
+    }, 4000);
+    return;
+  }
+  if (orderForm.description.length < 6 || orderForm.description.length > 30) {
+    errors.description = true;
+    setTimeout(() => {
+      errors.description = false;
+    }, 4000);
+    return;
+  }
+  await createOrder();
+  emit("closeOrderWindow");
+}
 async function createOrder() {
   await order.createOrder(orderForm);
   orderForm.title = "";
   orderForm.description = "";
   await order.getOrders();
-  emit("closeOrderWindow");
 }
-function closeDialog() {
+
+const closeDialog = () => {
   emit("closeOrderWindow");
-}
+};
 onMounted(() => {});
 </script>
 
@@ -111,6 +144,24 @@ onMounted(() => {});
         text-align: start;
         font-size: 22px;
         font-weight: 700;
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+
+        span {
+          font-size: 12px;
+          font-weight: 700;
+          margin-bottom: 5px;
+          width: 300px;
+          height: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 2px;
+          position: relative;
+          top: 5px;
+        }
       }
       .input {
         border: 0;
@@ -149,6 +200,35 @@ onMounted(() => {});
       }
     }
   }
+  &-error {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    width: 300px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    position: relative;
+    top: 5px;
+    visibility: hidden;
+  }
+  &-error-visible {
+    font-size: 12px;
+    font-weight: 700;
+    width: 300px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    position: relative;
+    top: 15px;
+    visibility: hidden;
+  }
+  .error_visible {
+    visibility: visible;
+  }
 }
 </style>
-@/store/ordersModule

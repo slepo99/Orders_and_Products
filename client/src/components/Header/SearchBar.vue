@@ -1,5 +1,5 @@
 <template>
-  <div class="container-search" v-if="isShow()">
+  <div class="container-search" v-if="isShow">
     <input
       class="container-search_input"
       v-model="searchValue"
@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { useProductsStore } from "@/store/productModule";
 import { useOrderStore } from "@/store/ordersModule";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
 const orderStore = useOrderStore();
@@ -29,13 +29,13 @@ function searchItem() {
   }
 }
 
-function isShow() {
+const isShow = computed(() => {
   return (
     router.currentRoute.value.name !== "login" &&
     router.currentRoute.value.name !== "registration" &&
     localStorage.getItem("token")
   );
-}
+});
 </script>
 
 <style lang="scss" scoped>

@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits, watchEffect, onMounted } from "vue";
+import { ref, watchEffect, onMounted } from "vue";
 
 const { options, selected } = defineProps(["options", "selected"]);
 const emit = defineEmits(["update:selected"]);

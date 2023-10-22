@@ -69,13 +69,13 @@ const isActive = ref(false);
 const showModal = ref(false);
 const currentOrderId = ref("");
 
-function openDeleteOrderWindow(id: string) {
+const openDeleteOrderWindow = (id: string) => {
   currentOrderId.value = id;
   showModal.value = true;
-}
-function closeDeleteOrderWindow() {
+};
+const closeDeleteOrderWindow = () => {
   showModal.value = false;
-}
+};
 function openProductList(id: string) {
   isActive.value = true;
   productsStore.showProducts(isActive.value);
@@ -99,11 +99,11 @@ const getTotalPriceInCurrency = (
     return totalPrice + currency;
   }, 0);
 };
-function setPrice(product: ProductGet[], currencySymbol: string) {
+const setPrice = (product: ProductGet[], currencySymbol: string) => {
   return getTotalPriceInCurrency(product, currencySymbol)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 const totalUSDPrice = computed(
   () => (product: ProductGet[]) => setPrice(product, "USD"),
 );

@@ -45,7 +45,7 @@ const currentDateTime = reactive<Date>({
   dayOfWeek: "",
 });
 
-function getCurrentDate() {
+const getCurrentDate = () => {
   const date = new Date();
   currentDateTime.time = date.toLocaleTimeString("en-US", {
     hour12: false,
@@ -56,7 +56,7 @@ function getCurrentDate() {
   currentDateTime.year = date.getFullYear().toString();
   currentDateTime.month = months[date.getMonth()].slice(0, 3);
   currentDateTime.dayOfWeek = days[(date.getDay() + 6) % 7];
-}
+};
 
 let intervalId: NodeJS.Timeout | null = null;
 

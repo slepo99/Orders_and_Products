@@ -91,36 +91,35 @@ import { onMounted } from "vue";
 
 const order = useOrderStore();
 const productStore = useProductsStore();
-function setGuarantee(date: string) {
+const setGuarantee = (date: string) => {
   const newDate = date.split("-");
   return `${newDate[0]} / ${months[parseFloat(newDate[1]) - 1]} / ${
     newDate[2]
   }`;
-}
-function setStatus(status: boolean) {
+};
+const setStatus = (status: boolean) => {
   if (status == true) {
     return "products-list_marker_free";
   } else if (status == false) {
     return "products-list_marker_busy";
   }
-}
-function setDate(id: string | undefined) {
+};
+const setDate = (id: string | undefined) => {
   const date =
     order.orders.find((order) =>
       order.products.some((product) => product._id === id),
     )?.date || "";
   const newDate = date.split("/");
-  return `${newDate[0]} / ${months[parseFloat(newDate[1]) - 1]} / ${
-    newDate[1]
-  }`;
-}
-function setPrice(price: string, isDefault: boolean) {
+
+  return `${newDate[0]} / ${months[parseInt(newDate[1]) - 1]} / ${newDate[1]}`;
+};
+const setPrice = (price: string, isDefault: boolean) => {
   if (isDefault) {
     return `₴${price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
   }
   return `$${price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-}
-function setOrderTitle(id: string | undefined) {
+};
+const setOrderTitle = (id: string | undefined) => {
   const title =
     order.orders.find((order) =>
       order.products.some((product) => product._id === id),
@@ -129,14 +128,14 @@ function setOrderTitle(id: string | undefined) {
     return title.slice(0, 40) + `...`;
   }
   return title;
-}
+};
 
-function setProductTitle(title: string) {
+const setProductTitle = (title: string) => {
   if (title.length > 25) {
     return title.slice(0, 25) + "...";
   }
   return title;
-}
+};
 
 async function removeProduct(id: string | undefined) {
   await productStore.deleteAnyProduct(id);

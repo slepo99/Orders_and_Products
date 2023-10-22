@@ -17,7 +17,6 @@ describe("Ordered Products", () => {
   });
 
   test("should open selected orders propucts and render products", async () => {
- 
     const order = {
       selectedOrder: {
         item: {

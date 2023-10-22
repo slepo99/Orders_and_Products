@@ -10,7 +10,7 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async createNewUser(regData: authData) {
       try {
-         await CreateNewUser(regData);
+        await CreateNewUser(regData);
         router.push("/login");
       } catch (error) {
         console.error(error, "Failed register new user");
